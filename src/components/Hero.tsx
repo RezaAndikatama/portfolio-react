@@ -1,4 +1,3 @@
-import React from "react";
 import profileImg from "../assets/formal-transparant.png";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../context/LanguageContext";
