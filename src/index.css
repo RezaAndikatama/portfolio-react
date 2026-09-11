@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .glass-nav {
+    @apply bg-white/70 backdrop-blur-lg border border-gray-200 shadow-glass transition-all duration-300;
+  }
+
+  .glass-nav:hover {
+    @apply bg-white/80 shadow-glass-hover;
+  }
+
+  .dark .glass-nav {
+    @apply bg-black/40 border-white/10 shadow-glass-dark;
+  }
+
+  .dark .glass-nav:hover {
+    @apply bg-black/50 shadow-glass-dark-hover;
+  }
+}
+
+@theme {
+  --font-serif: "Newsreader", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
