@@ -13,6 +13,9 @@ import ssUI from "../assets/uiux.png";
 import thumbnailLMS from "../assets/homelms.png";
 import lms1 from "../assets/lms1.png";
 import lms2 from "../assets/lms2.png";
+import nokaThumbail from "../assets/noka.png";
+import noka2 from "../assets/noka2.png";
+import noka3 from "../assets/noka3.png";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
@@ -42,7 +45,6 @@ export default function Portfolio() {
     document.body.style.overflow = "";
   };
 
-  // Catatan: title & desc project masih hardcode Bahasa Indonesia (belum ada versi EN di data ini)
   const portfolios: PortfolioItem[] = [
     {
       id: 1,
@@ -70,11 +72,11 @@ export default function Portfolio() {
     },
     {
       id: 4,
-      title: "Company Profile Web",
-      img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?fit=crop&w=600&q=80",
+      title: "Landing Page NOKA Journey",
+      img: nokaThumbail,
       desc: "Website profil perusahaan modern dengan animasi interaktif dan optimasi SEO tingkat tinggi.",
-      techStack: ["Next JS", "Tailwind CSS", "TypeScript"],
-      images: ["https://images.unsplash.com/photo-1461749280684-dccba630e2f6?fit=crop&w=800&q=80", "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?fit=crop&w=800&q=80"],
+      techStack: ["Figma", "Tailwind CSS", "HTML"],
+      images: [nokaThumbail, noka2, noka3],
     },
   ];
 
