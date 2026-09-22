@@ -81,7 +81,7 @@ export const experienceData: Experience[] = [
     date: "Sep 2025 - Des 2025",
     type: "Internship",
     logo: kkpLogo,
-    desc: "Berperan sentral dalam merancang, membangun, dan memelihara pipeline CI/CD (Continuous Integration & Continuous Deployment) untuk aplikasi layanan internal kementerian. Melakukan otomatisasi konfigurasi web server, manajemen container (Docker & Kubernetes), serta memantau (monitoring) performa server agar aplikasi dapat berjalan dengan stabilitas tinggi dan minim downtime.",
+    desc: "Berperan dalam merancang, membangun, dan memelihara pipeline CI/CD (Continuous Integration & Continuous Deployment) untuk aplikasi layanan internal kementerian. Melakukan otomatisasi konfigurasi web server, manajemen container (Docker & Kubernetes), serta memantau (monitoring) performa server agar aplikasi dapat berjalan dengan stabilitas tinggi dan minim downtime.",
     images: [kkpDocumentation, reportKKP, reportKKP2, reportKKP3],
   },
 ];

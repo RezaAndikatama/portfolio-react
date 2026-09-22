@@ -1,71 +1,66 @@
-import profileImg from "../assets/profile4.jpg";
+import type { ReactNode } from "react";
+import { Code2, PenTool, Cloud } from "lucide-react";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
 
-export default function About() {
+// Icon lucide-react untuk tiap layanan, urut sesuai items di translations.ts
+const SERVICE_ICONS = [Code2, PenTool, Cloud];
+
+// Kotak ikon bermotif grid + mask radial — elemen dekoratif khas dari referensi "features-2".
+// Diadaptasi tanpa shadcn (tidak pakai <Card>), murni div + Tailwind seperti bagian lain di project ini.
+function CardDecorator({ children }: { children: ReactNode }) {
+  return (
+    <div aria-hidden className="relative mx-auto size-16 md:size-20 [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]">
+      <div className="absolute inset-0 [--border:black] dark:[--border:white] bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:12px_12px] opacity-10" />
+      <div className="bg-gray-50 dark:bg-cardDark absolute inset-0 m-auto flex size-10 md:size-12 items-center justify-center border-t border-l border-gray-300 dark:border-white/20">{children}</div>
+    </div>
+  );
+}
+
+export default function Services() {
   const { ref, isInView } = useInView();
   const { language } = useLanguage();
-  const t = translations[language].about;
+  const t = translations[language].services;
 
   return (
-    <section id="about" ref={ref} aria-labelledby="about-title" className="py-20 px-6 bg-white dark:bg-darkbg transition-colors duration-300">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-        {/* Konten teks — fade + slide dari kiri */}
-        <div className={`w-full md:w-1/2 order-2 md:order-1 transition-all duration-700 ease-out ${isInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}`}>
+    <section id="services" ref={ref} aria-labelledby="services-title" className="py-20 md:py-28 px-6 bg-white dark:bg-darkbg transition-colors duration-300">
+      <div className="max-w-5xl mx-auto">
+        {/* Header — fade + slide dari bawah */}
+        <div className={`text-center mb-12 md:mb-16 transition-all duration-700 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <p className="font-mono text-primary font-semibold tracking-wider mb-2">{t.label}</p>
-          <h2 id="about-title" className="font-serif text-3xl md:text-4xl font-semibold uppercase text-gray-900 dark:text-white mb-6">
+          <h2 id="services-title" className="font-serif text-3xl md:text-4xl font-semibold uppercase text-gray-900 dark:text-white">
             {t.heading}
           </h2>
-
-          <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-            <p>
-              {t.paragraph1Before} <span className="text-primary font-semibold">Reza Andikatama</span>
-              {t.paragraph1After}
-            </p>
-            <p>{t.paragraph2}</p>
-          </div>
-
-          <div className="grid grid-cols-3 divide-x divide-gray-200 dark:divide-white/10 text-center bg-gray-50 dark:bg-cardDark p-4 rounded-xl border border-gray-100 dark:border-white/5">
-            <div className="px-2">
-              <h3 className="text-2xl font-bold text-primary mb-1">4+</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400">{t.statExperience}</p>
-            </div>
-            <div className="px-2">
-              <h3 className="text-2xl font-bold text-primary mb-1">4+</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400">{t.statProjects}</p>
-            </div>
-            <div className="px-2">
-              <h3 className="text-2xl font-bold text-primary mb-1">5+</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400">{t.statTechStack}</p>
-            </div>
-          </div>
         </div>
 
-        {/* --- Image Content (Modern UI) --- fade + slide dari kanan, delay sedikit agar muncul setelah teks */}
-        <div className={`w-full md:w-5/12 order-1 md:order-2 flex justify-center transition-all duration-700 ease-out delay-150 ${isInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}>
-          <div className="relative group w-64 h-80 md:w-80 md:h-96 cursor-pointer">
-            {/* 1. Animated Glow Background */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-orange-400 rounded-2xl blur-lg opacity-30 group-hover:opacity-70 transition duration-500 group-hover:duration-200"></div>
+        {/* Grid 3 kolom, tiap card berisi CardDecorator + judul + deskripsi, semua rata tengah (mengikuti gaya referensi) */}
+        <div className="mx-auto grid max-w-sm gap-6 *:text-center md:max-w-full md:grid-cols-3">
+          {t.items.map((item, index) => {
+            const Icon = SERVICE_ICONS[index];
+            return (
+              <div
+                key={item.title}
+                className={`group bg-gray-50 dark:bg-cardDark rounded-2xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                style={{ transitionDelay: isInView ? `${index * 120}ms` : "0ms", transitionDuration: "700ms", transitionTimingFunction: "ease-out" }}
+              >
+                <CardDecorator>
+                  <Icon className="size-5 md:size-6 text-primary" aria-hidden />
+                </CardDecorator>
 
-            {/* 2. Main Card Frame (Glassmorphism & Scale) */}
-            <div className="relative h-full w-full bg-white dark:bg-cardDark rounded-2xl p-2 border border-gray-200 dark:border-white/10 shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02]">
-              {/* 3. Image with Grayscale to Color Transition */}
-              <img src={profileImg} alt="Portrait of Reza Andikatama" className="w-full h-full object-cover rounded-xl filter grayscale group-hover:grayscale-0 transition-all duration-500" />
+                <h3 className="font-serif mt-6 text-lg md:text-xl font-semibold text-gray-900 dark:text-white">{item.title}</h3>
+                <p className="mt-3 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{item.desc}</p>
 
-              {/* Overlay Tipis (Memberikan kedalaman warna saat di-hover) */}
-              <div className="absolute inset-x-2 bottom-2 h-1/2 bg-gradient-to-t from-black/50 to-transparent rounded-b-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-            </div>
-
-            {/* 4. Floating Status Badge */}
-            <div className="absolute -bottom-5 left-1/2 bg-white dark:bg-cardDark py-2 px-5 rounded-full shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)] border border-gray-200 dark:border-white/10 flex items-center gap-2 transform -translate-x-1/2 translate-y-4 opacity-0 group-hover:-translate-x-1/2 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100 z-20">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-              </span>
-              <span className="text-sm font-bold text-gray-800 dark:text-gray-200 whitespace-nowrap">{t.openToWork}</span>
-            </div>
-          </div>
+                <div className="flex flex-wrap justify-center gap-2 mt-5">
+                  {item.tags.map((tag) => (
+                    <span key={tag} className="font-mono text-[10px] font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

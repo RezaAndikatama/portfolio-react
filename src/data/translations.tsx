@@ -2,7 +2,7 @@ export const translations = {
   id: {
     nav: {
       home: "Beranda",
-      profile: "Profil",
+      services: "Layanan",
       experience: "Pengalaman",
       skills: "Keahlian",
       portfolio: "Proyek",
@@ -16,18 +16,26 @@ export const translations = {
       bio: "Hi, saya Reza Andikatama — developer kreatif yang senang menciptakan pengalaman digital yang mulus, terhubung, dan berdampak.",
       cta: "Lihat karya saya",
     },
-    about: {
-      label: "Tentang Saya",
-      heading: "Siapa Saya",
-      paragraph1Before: "Halo! Saya",
-      paragraph1After:
-        ", fresh graduate Program Studi Sistem Informasi dari Universitas Bina Sarana Informatika, sekaligus Web Developer yang berbasis di Jakarta, Indonesia. Saya memiliki passion yang besar dalam membangun tampilan web yang menarik, responsif, dan mudah digunakan oleh pengguna.",
-      paragraph2:
-        "Melalui berbagai proyek akademis dan portofolio, saya telah membekali diri dengan pemahaman praktis yang komprehensif—mulai dari Front-End Development, UI/UX Design, hingga pengalaman magang sebagai Developer Operations (DevOps). Saya terbiasa menggunakan teknologi modern seperti Laravel, PHP, React, dan Tailwind CSS untuk menciptakan solusi digital yang tidak hanya fungsional, tetapi juga estetis dan efisien. Di luar rutinitas coding, saya senang mengeksplorasi tren desain terbaru dan selalu haus untuk terus belajar serta berkembang di industri teknologi.",
-      statExperience: "Pengalaman",
-      statProjects: "Proyek Selesai",
-      statTechStack: "Tech Stack",
-      openToWork: "Terbuka untuk Kerja",
+    services: {
+      label: "Apa yang Saya Kerjakan",
+      heading: "Layanan Saya",
+      items: [
+        {
+          title: "Front-End Developer",
+          desc: "Mengubah desain antarmuka menjadi code untuk web dari nol menggunakan TailwindCSS dan React dengan responsive.",
+          tags: ["Laravel", "PHP", "React", "Tailwind CSS"],
+        },
+        {
+          title: "UI/UX Design",
+          desc: "Merancang antarmuka yang intuitif dan estetis menggunakan Figma, mulai dari wireframe, prototyping, hingga design system yang siap diimplementasikan.",
+          tags: ["Figma", "Wireframing", "Prototyping"],
+        },
+        {
+          title: "DevOps",
+          desc: "Menyiapkan pipeline CI/CD, containerization, dan konfigurasi server agar aplikasi berjalan stabil dengan proses deployment yang efisien.",
+          tags: ["Docker", "CI/CD", "Nginx"],
+        },
+      ],
     },
     skills: {
       label: "Spesialisasi Saya",
@@ -62,7 +70,7 @@ export const translations = {
   en: {
     nav: {
       home: "Home",
-      profile: "Profile",
+      services: "Services",
       experience: "Experience",
       skills: "Skills",
       portfolio: "Portfolio",
@@ -76,18 +84,26 @@ export const translations = {
       bio: "Hi, I'm Reza Andikatama — a creative developer passionate about creating seamless digital experiences that connect and convert.",
       cta: "See my works",
     },
-    about: {
-      label: "About Me",
-      heading: "Who I Am",
-      paragraph1Before: "Hi! I'm",
-      paragraph1After:
-        ", a fresh graduate of Information Systems from Universitas Bina Sarana Informatika, and a Web Developer based in Jakarta, Indonesia. I have a strong passion for building web interfaces that are engaging, responsive, and easy for users to interact with.",
-      paragraph2:
-        "Through various academic projects and portfolio work, I've equipped myself with comprehensive practical understanding — from Front-End Development, UI/UX Design, to an internship experience as a Developer Operations (DevOps). I'm accustomed to using modern technologies like Laravel, PHP, React, and Tailwind CSS to create digital solutions that are not only functional, but also aesthetic and efficient. Outside of coding, I enjoy exploring the latest design trends and I'm always eager to keep learning and growing in the tech industry.",
-      statExperience: "Experience",
-      statProjects: "Projects Done",
-      statTechStack: "Tech Stack",
-      openToWork: "Open to Work",
+    services: {
+      label: "What I Do",
+      heading: "My Services",
+      items: [
+        {
+          title: "Front-End Developer",
+          desc: "Translate design to code for applications from scratch using Tailwind, React, and Build Responsive Website.",
+          tags: ["Laravel", "PHP", "React", "Tailwind CSS"],
+        },
+        {
+          title: "UI/UX Design",
+          desc: "Designing intuitive and aesthetic interfaces using Figma, from wireframes, prototyping, to a design system ready for implementation.",
+          tags: ["Figma", "Wireframing", "Prototyping"],
+        },
+        {
+          title: "DevOps",
+          desc: "Setting up CI/CD pipelines, containerization, and server configuration so applications run stably with an efficient deployment process.",
+          tags: ["Docker", "CI/CD", "Nginx"],
+        },
+      ],
     },
     skills: {
       label: "My Specialization",

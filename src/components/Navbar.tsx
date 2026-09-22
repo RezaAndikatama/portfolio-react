@@ -28,11 +28,11 @@ export default function Navbar() {
     }
   };
 
-  // Catatan: href "home" diperbaiki dari "#home" (tidak pernah ada elemennya) jadi "#hero",
-  // supaya cocok dengan id section Hero yang sebenarnya (<section id="hero">).
+  // Catatan: key "profile"/href "#about" diganti "services"/"#services",
+  // karena section About sudah digantikan Services.
   const menuItems: { key: keyof typeof t; href: string }[] = [
     { key: "home", href: "#hero" },
-    { key: "profile", href: "#about" },
+    { key: "services", href: "#services" },
     { key: "portfolio", href: "#portfolio" },
     { key: "skills", href: "#skills" },
     { key: "experience", href: "#experience" },
@@ -52,8 +52,6 @@ export default function Navbar() {
           }
         });
       },
-      // rootMargin menyempitkan area deteksi jadi pita tipis di sekitar 40% dari atas viewport,
-      // supaya section "aktif" berganti saat judulnya melewati titik itu, bukan saat baru muncul di ujung layar.
       { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
     );
 

@@ -4,8 +4,15 @@ import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
 
+// Helper gabung className kondisional — pengganti `cn` dari shadcn/lib-utils,
+// karena project ini tidak pakai path alias "@/lib/utils".
+function cx(...classes: (string | false | undefined | null)[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
 export default function ExperienceSection() {
   const [selectedExp, setSelectedExp] = useState<Experience | null>(null);
+  const [activeId, setActiveId] = useState<string>(experienceData[0]?.id ?? "");
   const { ref, isInView } = useInView();
   const { language } = useLanguage();
   const t = translations[language].experience;
@@ -24,7 +31,7 @@ export default function ExperienceSection() {
     <>
       {/* --- Bagian Working Period --- */}
       <section id="experience" ref={ref} aria-labelledby="experience-title" className="py-24 md:py-32 px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {/* Section Header — fade + slide dari bawah */}
           <div className={`text-center mb-16 md:mb-20 transition-all duration-700 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             <span className="font-mono text-primary font-semibold text-xs md:text-sm uppercase tracking-widest">{t.label}</span>
@@ -33,44 +40,65 @@ export default function ExperienceSection() {
             </h2>
           </div>
 
-          {/* Experience List — layout editorial, garis pemisah tipis, tanpa card box */}
-          <div className="divide-y divide-gray-200 dark:divide-white/10 border-t border-b border-gray-200 dark:border-white/10">
-            {experienceData.map((exp, index) => (
-              <article
-                key={exp.id}
-                className={`group py-8 md:py-10 flex flex-col md:flex-row gap-5 md:gap-8 items-start transition-all duration-700 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-                style={{ transitionDelay: isInView ? `${index * 120}ms` : "0ms" }}
-              >
-                {/* Logo perusahaan */}
-                <div className="bg-gray-50 dark:bg-white/5 p-2.5 rounded-lg flex-shrink-0 border border-gray-100 dark:border-white/5">
-                  <img src={exp.logo} alt={`${exp.company} Logo`} className="w-10 h-10 object-contain rounded-md" />
-                </div>
-
-                {/* Konten */}
-                <div className="flex-1 w-full flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div>
-                    <div className="flex flex-wrap items-center gap-3 mb-1">
-                      <h3 className="font-serif text-lg md:text-xl font-semibold text-gray-900 dark:text-white group-hover:text-primary transition-colors">{exp.role}</h3>
-                      <span className="font-mono text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full whitespace-nowrap">{exp.date}</span>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-2.5 text-sm">
-                      <span className="font-semibold text-gray-700 dark:text-gray-300">{exp.company}</span>
-                      <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600" aria-hidden="true"></span>
-                      <span className="font-mono text-gray-500 dark:text-gray-400 text-xs">{exp.type}</span>
-                    </div>
+          {/* Elastic Accordion Gallery — panel melebar saat di-hover/klik, mengadaptasi konsep elastic-gallery */}
+          <div className={`flex h-[420px] sm:h-[460px] md:h-[520px] w-full flex-col gap-2 md:flex-row md:gap-4 transition-all duration-700 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+            {experienceData.map((exp, index) => {
+              const isActive = activeId === exp.id;
+              return (
+                <div
+                  key={exp.id}
+                  onMouseEnter={() => setActiveId(exp.id)}
+                  onClick={() => setActiveId(exp.id)} // dukungan sentuh di mobile
+                  className={cx(
+                    "group relative cursor-pointer overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-900",
+                    "transition-[flex,filter] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]",
+                    isActive ? "flex-[4]" : "flex-[1]",
+                    isActive ? "brightness-100" : "brightness-[.6] hover:brightness-90",
+                  )}
+                >
+                  {/* Layer latar: gradient gelap + logo raksasa transparan sebagai elemen dekoratif
+                      (pengganti foto asli, karena data pengalaman hanya punya logo, bukan foto full-bleed) */}
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-950" />
+                    <img src={exp.logo} alt="" aria-hidden="true" className={cx("absolute inset-0 m-auto h-1/2 w-1/2 object-contain opacity-10 transition-transform duration-1000", isActive ? "scale-100" : "scale-110")} />
+                    <div className={cx("absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-500", isActive ? "opacity-100" : "opacity-70")} />
                   </div>
 
-                  {/* Action Button */}
-                  <button
-                    onClick={() => openModal(exp)}
-                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300 font-semibold text-sm hover:border-primary hover:text-primary transition-all duration-300 flex items-center justify-center gap-2 group/btn flex-shrink-0"
-                  >
-                    <span>{t.detailButton}</span>
-                    <i className="bx bx-right-arrow-alt text-lg transition-transform group-hover/btn:translate-x-1"></i>
-                  </button>
+                  {/* Konten */}
+                  <div className="absolute bottom-0 left-0 right-0 flex h-full flex-col justify-end p-4 md:p-8">
+                    {/* Konten aktif: role, badge, deskripsi singkat, tombol Detail */}
+                    <div className={cx("flex flex-col gap-2 transition-all duration-500", isActive ? "translate-y-0 opacity-100 delay-200" : "translate-y-12 opacity-0")}>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="rounded-full border border-white/30 bg-white/10 px-2 py-1 text-[10px] font-mono font-medium uppercase tracking-wider text-white backdrop-blur-md md:px-3 md:text-xs">{exp.type}</span>
+                        <span className="rounded-full border border-primary/40 bg-primary/20 px-2 py-1 text-[10px] font-mono font-medium text-white backdrop-blur-md md:px-3 md:text-xs">{exp.date}</span>
+                      </div>
+
+                      <h3 className="font-serif text-xl font-semibold leading-tight text-white md:text-3xl">{exp.role}</h3>
+                      <p className="text-xs font-medium text-white/70 md:text-sm">{exp.company}</p>
+
+                      <p className="hidden md:block text-xs text-white/60 leading-relaxed line-clamp-2 max-w-md mt-1">{exp.desc}</p>
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openModal(exp);
+                        }}
+                        className="mt-2 flex w-fit items-center gap-2 text-xs font-bold uppercase tracking-widest text-white/90 hover:text-primary transition-colors md:mt-4 md:text-sm"
+                      >
+                        {t.detailButton}
+                        <i className="bx bx-right-arrow-alt text-base -rotate-45"></i>
+                      </button>
+                    </div>
+
+                    {/* Konten tidak aktif: nama perusahaan vertikal (desktop) / nomor urut (mobile) */}
+                    <div className={cx("absolute bottom-4 left-1/2 -translate-x-1/2 md:bottom-8 transition-all duration-500", isActive ? "opacity-0 scale-50" : "opacity-100 delay-300")}>
+                      <span className="hidden whitespace-nowrap text-sm font-bold uppercase tracking-widest text-white [writing-mode:vertical-rl] md:block">{exp.company}</span>
+                      <span className="block text-xs font-bold text-white md:hidden">{String(index + 1).padStart(2, "0")}</span>
+                    </div>
+                  </div>
                 </div>
-              </article>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

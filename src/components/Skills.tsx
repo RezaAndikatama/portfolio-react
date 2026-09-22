@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { skillsData } from "../data/portfolioData";
 import { useInView } from "../hooks/useInView";
 
@@ -15,8 +17,21 @@ function FigmaIcon({ className, style }: { className?: string; style?: React.CSS
 
 const ORANGE_FILTER = "brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(346deg) brightness(101%) contrast(101%)";
 
+// Konfigurasi animasi "wave" periodik — mengadaptasi konsep logo-clouds: tiap beberapa detik,
+// semua icon melakukan efek wipe (clip-path menyapu) + blur + fade secara stagger satu-satu.
+const WAVE_INTERVAL = 4000; // jeda antar gelombang, ms
+const WAVE_STAGGER = 0.06; // jeda antar icon dalam satu gelombang, detik
+const WIPE_DURATION = 0.9;
+const WIPE_TIMES = [0, 0.4, 1] as const;
+
 export default function Skills() {
   const { ref, isInView } = useInView();
+  const [waving, setWaving] = useState(false);
+
+  useEffect(() => {
+    const id = setInterval(() => setWaving(true), WAVE_INTERVAL);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <section id="skills" ref={ref} aria-labelledby="skills-title" className="py-20 md:py-28 lg:py-36 px-4 sm:px-6 bg-gray-100 dark:bg-[#030304] transition-colors duration-300">
@@ -33,6 +48,7 @@ export default function Skills() {
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-x-3 gap-y-6 sm:gap-5">
           {skillsData.map((skill, index) => {
             const isFigma = skill.name === "Figma";
+            const isLast = index === skillsData.length - 1;
 
             return (
               <div
@@ -40,20 +56,50 @@ export default function Skills() {
                 className={`flex flex-col items-center gap-2 px-1 transition-all duration-500 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                 style={{ transitionDelay: isInView ? `${index * 40}ms` : "0ms" }}
               >
+                {/* Kotak luar — TETAP <div> biasa, supaya hover:shadow tidak ikut kepotong oleh
+                    clip-path animasi wave (clip-path pada elemen manapun akan memotong box-shadow
+                    yang menyebar keluar dari box-nya, meskipun nilai clip-path-nya "penuh"). */}
                 <div className="group relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_25px_rgba(255,107,53,0.5)]">
-                  {isFigma ? (
-                    <>
-                      {/* Figma: SVG asli, oranye via filter di default, natural saat hover */}
-                      <FigmaIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 absolute transition-opacity duration-300 group-hover:opacity-0" style={{ filter: ORANGE_FILTER }} />
-                      <FigmaIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 absolute opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                    </>
-                  ) : (
-                    <>
-                      {/* Icon Devicon lain: currentColor bekerja normal */}
-                      <i className={`${skill.icon} text-2xl sm:text-3xl md:text-4xl text-primary absolute transition-opacity duration-300 group-hover:opacity-0`}></i>
-                      <i className={`${skill.icon} colored text-2xl sm:text-3xl md:text-4xl absolute opacity-0 transition-opacity duration-300 group-hover:opacity-100`}></i>
-                    </>
-                  )}
+                  {/* motion.div cuma bungkus icon-nya saja — clip-path animasi terkurung di sini,
+                      tidak lagi menyentuh box luar sehingga shadow bisa render bebas keluar box */}
+                  <motion.div
+                    animate={
+                      waving
+                        ? {
+                            clipPath: ["inset(0 0% 0 0)", "inset(0 100% 0 0)", "inset(0 0% 0 0)"],
+                            filter: ["blur(0px)", "blur(6px)", "blur(0px)"],
+                            opacity: [1, 0.3, 1],
+                          }
+                        : { clipPath: "inset(0 0% 0 0)", filter: "blur(0px)", opacity: 1 }
+                    }
+                    transition={
+                      waving
+                        ? {
+                            clipPath: { duration: WIPE_DURATION, times: WIPE_TIMES, ease: ["easeIn", [0.16, 1, 0.3, 1]], delay: index * WAVE_STAGGER },
+                            filter: { duration: WIPE_DURATION * 0.9, times: WIPE_TIMES, ease: "easeInOut", delay: index * WAVE_STAGGER },
+                            opacity: { duration: WIPE_DURATION * 0.85, times: WIPE_TIMES, ease: "easeInOut", delay: index * WAVE_STAGGER },
+                          }
+                        : { duration: 0.3, ease: "easeOut" }
+                    }
+                    onAnimationComplete={() => {
+                      if (waving && isLast) setWaving(false);
+                    }}
+                    className="relative flex items-center justify-center w-full h-full"
+                  >
+                    {isFigma ? (
+                      <>
+                        {/* Figma: SVG asli, oranye via filter di default, natural saat hover */}
+                        <FigmaIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 absolute transition-opacity duration-300 group-hover:opacity-0" style={{ filter: ORANGE_FILTER }} />
+                        <FigmaIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 absolute opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                      </>
+                    ) : (
+                      <>
+                        {/* Icon Devicon lain: currentColor bekerja normal */}
+                        <i className={`${skill.icon} text-2xl sm:text-3xl md:text-4xl text-primary absolute transition-opacity duration-300 group-hover:opacity-0`}></i>
+                        <i className={`${skill.icon} colored text-2xl sm:text-3xl md:text-4xl absolute opacity-0 transition-opacity duration-300 group-hover:opacity-100`}></i>
+                      </>
+                    )}
+                  </motion.div>
                 </div>
                 <span className="font-mono text-[10px] sm:text-[11px] md:text-xs text-gray-600 dark:text-gray-400 text-center leading-tight whitespace-nowrap">{skill.name}</span>
               </div>
