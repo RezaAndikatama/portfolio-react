@@ -17,12 +17,13 @@ function FigmaIcon({ className, style }: { className?: string; style?: React.CSS
 
 const ORANGE_FILTER = "brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(346deg) brightness(101%) contrast(101%)";
 
-// Konfigurasi animasi "wave" periodik — mengadaptasi konsep logo-clouds: tiap beberapa detik,
-// semua icon melakukan efek wipe (clip-path menyapu) + blur + fade secara stagger satu-satu.
-const WAVE_INTERVAL = 4000; // jeda antar gelombang, ms
-const WAVE_STAGGER = 0.06; // jeda antar icon dalam satu gelombang, detik
+// Konfigurasi animasi "wave" periodik
+const WAVE_INTERVAL = 4000;
+const WAVE_STAGGER = 0.06;
 const WIPE_DURATION = 0.9;
-const WIPE_TIMES = [0, 0.4, 1] as const;
+
+// PERBAIKAN: Mengubah 'as const' menjadi 'as number[]'
+const WIPE_TIMES = [0, 0.4, 1] as number[];
 
 export default function Skills() {
   const { ref, isInView } = useInView();
@@ -36,7 +37,7 @@ export default function Skills() {
   return (
     <section id="skills" ref={ref} aria-labelledby="skills-title" className="py-20 md:py-28 lg:py-36 px-4 sm:px-6 bg-gray-100 dark:bg-[#030304] transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
-        {/* Header — fade + slide dari bawah */}
+        {/* Header */}
         <div className={`text-center mb-12 md:mb-16 lg:mb-20 transition-all duration-700 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <p className="font-mono text-primary font-semibold text-xs sm:text-sm tracking-wider mb-2">My Specialization</p>
           <h2 id="skills-title" className="font-serif text-2xl sm:text-3xl md:text-4xl font-semibold uppercase text-gray-900 dark:text-white">
@@ -44,7 +45,7 @@ export default function Skills() {
           </h2>
         </div>
 
-        {/* Grid responsif: 3 kolom di layar kecil, bertambah seiring lebar layar agar label tidak bertabrakan */}
+        {/* Grid responsif */}
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-x-3 gap-y-6 sm:gap-5">
           {skillsData.map((skill, index) => {
             const isFigma = skill.name === "Figma";
@@ -56,12 +57,7 @@ export default function Skills() {
                 className={`flex flex-col items-center gap-2 px-1 transition-all duration-500 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                 style={{ transitionDelay: isInView ? `${index * 40}ms` : "0ms" }}
               >
-                {/* Kotak luar — TETAP <div> biasa, supaya hover:shadow tidak ikut kepotong oleh
-                    clip-path animasi wave (clip-path pada elemen manapun akan memotong box-shadow
-                    yang menyebar keluar dari box-nya, meskipun nilai clip-path-nya "penuh"). */}
                 <div className="group relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_25px_rgba(255,107,53,0.5)]">
-                  {/* motion.div cuma bungkus icon-nya saja — clip-path animasi terkurung di sini,
-                      tidak lagi menyentuh box luar sehingga shadow bisa render bebas keluar box */}
                   <motion.div
                     animate={
                       waving
@@ -88,13 +84,11 @@ export default function Skills() {
                   >
                     {isFigma ? (
                       <>
-                        {/* Figma: SVG asli, oranye via filter di default, natural saat hover */}
                         <FigmaIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 absolute transition-opacity duration-300 group-hover:opacity-0" style={{ filter: ORANGE_FILTER }} />
                         <FigmaIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 absolute opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                       </>
                     ) : (
                       <>
-                        {/* Icon Devicon lain: currentColor bekerja normal */}
                         <i className={`${skill.icon} text-2xl sm:text-3xl md:text-4xl text-primary absolute transition-opacity duration-300 group-hover:opacity-0`}></i>
                         <i className={`${skill.icon} colored text-2xl sm:text-3xl md:text-4xl absolute opacity-0 transition-opacity duration-300 group-hover:opacity-100`}></i>
                       </>
