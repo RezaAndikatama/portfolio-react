@@ -13,7 +13,6 @@ import ssUI from "../assets/uiux.png";
 import thumbnailLMS from "../assets/homelms.png";
 import lms1 from "../assets/lms1.png";
 import lms2 from "../assets/lms2.png";
-import nokaThumbail from "../assets/noka.png";
 import noka1 from "../assets/noka1.png";
 import noka2 from "../assets/noka2.png";
 import noka3 from "../assets/noka3.png";
