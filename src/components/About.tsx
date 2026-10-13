@@ -41,7 +41,7 @@ export default function Services() {
             return (
               <div
                 key={item.title}
-                className={`group bg-gray-50 dark:bg-cardDark rounded-2xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                className={`group bg-gray-50 dark:bg-cardDark rounded-2xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
                 style={{ transitionDelay: isInView ? `${index * 120}ms` : "0ms", transitionDuration: "700ms", transitionTimingFunction: "ease-out" }}
               >
                 <CardDecorator>

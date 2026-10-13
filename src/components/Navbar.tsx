@@ -2,6 +2,28 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
 
+function LanguageSwitch({ language, onToggle }: { language: "id" | "en"; onToggle: () => void }) {
+  return (
+    <button onClick={onToggle} aria-label="Toggle language" className="relative flex items-center w-[72px] h-10 rounded-full bg-gray-200 dark:bg-white/10 p-1 transition-colors">
+      <span className={`absolute top-1 left-1 w-8 h-8 rounded-full bg-white dark:bg-cardDark shadow-sm transition-transform duration-300 ${language === "en" ? "translate-x-8" : "translate-x-0"}`}></span>
+      <span className={`relative z-10 w-8 text-center text-[11px] font-bold leading-none transition-colors ${language === "id" ? "text-primary" : "text-gray-500 dark:text-gray-400"}`}>ID</span>
+      <span className={`relative z-10 w-8 text-center text-[11px] font-bold leading-none transition-colors ${language === "en" ? "text-primary" : "text-gray-500 dark:text-gray-400"}`}>EN</span>
+    </button>
+  );
+}
+
+function ThemeButton({ isDark, onToggle }: { isDark: boolean; onToggle: () => void }) {
+  return (
+    <button
+      onClick={onToggle}
+      aria-label="Toggle dark mode"
+      className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-white/10 text-gray-700 dark:text-white hover:text-primary dark:hover:text-primary transition-all"
+    >
+      <i className={isDark ? "bx bx-sun text-lg" : "bx bx-moon text-lg"}></i>
+    </button>
+  );
+}
+
 export default function Navbar() {
   const [isDark, setIsDark] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -90,19 +112,8 @@ export default function Navbar() {
 
           {/* Dark Mode + Bahasa — kanan (desktop saja) */}
           <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-            <button onClick={toggleLanguage} aria-label="Toggle language" className="relative flex items-center w-16 h-9 rounded-full bg-gray-200 dark:bg-white/10 p-1 transition-colors">
-              <span className={`absolute top-1 left-1 w-7 h-7 rounded-full bg-white dark:bg-cardDark shadow-sm transition-transform duration-300 ${language === "en" ? "translate-x-7" : "translate-x-0"}`}></span>
-              <span className={`relative z-10 w-1/2 text-center text-[10px] font-bold transition-colors ${language === "id" ? "text-primary" : "text-gray-500 dark:text-gray-400"}`}>ID</span>
-              <span className={`relative z-10 w-1/2 text-center text-[10px] font-bold transition-colors ${language === "en" ? "text-primary" : "text-gray-500 dark:text-gray-400"}`}>EN</span>
-            </button>
-
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle dark mode"
-              className="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-200 dark:bg-white/10 text-gray-700 dark:text-white hover:text-primary dark:hover:text-primary transition-all"
-            >
-              <i className={isDark ? "bx bx-sun text-lg" : "bx bx-moon text-lg"}></i>
-            </button>
+            <LanguageSwitch language={language} onToggle={toggleLanguage} />
+            <ThemeButton isDark={isDark} onToggle={toggleTheme} />
           </div>
 
           {/* Mobile: hanya tombol hamburger — dark mode & bahasa dipindah ke dalam dropdown */}
@@ -127,19 +138,12 @@ export default function Navbar() {
               </a>
             ))}
 
-            {/* Dark Mode + Bahasa — dalam dropdown mobile */}
+            {/* Dark Mode + Bahasa — dalam dropdown mobile, pakai komponen yang sama dengan desktop */}
             <div className="flex items-center justify-between gap-3 mt-2 pt-4 border-t border-gray-200 dark:border-white/10">
               <span className="text-xs font-mono text-gray-500 dark:text-gray-400 uppercase tracking-wider">{language === "id" ? "Pengaturan" : "Settings"}</span>
               <div className="flex items-center gap-3">
-                <button onClick={toggleLanguage} aria-label="Toggle language" className="relative flex items-center w-16 h-9 rounded-full bg-gray-200 dark:bg-white/10 p-1 transition-colors">
-                  <span className={`absolute top-1 left-1 w-7 h-7 rounded-full bg-white dark:bg-cardDark shadow-sm transition-transform duration-300 ${language === "en" ? "translate-x-7" : "translate-x-0"}`}></span>
-                  <span className={`relative z-10 w-1/2 text-center text-[10px] font-bold transition-colors ${language === "id" ? "text-primary" : "text-gray-500 dark:text-gray-400"}`}>ID</span>
-                  <span className={`relative z-10 w-1/2 text-center text-[10px] font-bold transition-colors ${language === "en" ? "text-primary" : "text-gray-500 dark:text-gray-400"}`}>EN</span>
-                </button>
-
-                <button onClick={toggleTheme} aria-label="Toggle dark mode" className="w-10 h-9 flex items-center justify-center rounded-xl bg-gray-200 dark:bg-white/10 text-gray-700 dark:text-white hover:text-primary transition-all">
-                  <i className={isDark ? "bx bx-sun text-lg" : "bx bx-moon text-lg"}></i>
-                </button>
+                <LanguageSwitch language={language} onToggle={toggleLanguage} />
+                <ThemeButton isDark={isDark} onToggle={toggleTheme} />
               </div>
             </div>
           </div>

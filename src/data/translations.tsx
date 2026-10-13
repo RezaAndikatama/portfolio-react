@@ -23,17 +23,17 @@ export const translations = {
         {
           title: "Front-End Developer",
           desc: "Mengubah desain antarmuka menjadi code untuk web dari nol menggunakan TailwindCSS dan React dengan responsive.",
-          tags: ["Laravel", "PHP", "React", "Tailwind CSS"],
+          tags: ["Laravel", "React", "Bootstrap", "Tailwind CSS"],
         },
         {
           title: "UI/UX Design",
           desc: "Merancang antarmuka yang intuitif dan estetis menggunakan Figma, mulai dari wireframe, prototyping, hingga design system yang siap diimplementasikan.",
-          tags: ["Figma", "Wireframing", "Prototyping"],
+          tags: ["Figma", "Wireframing", "Prototyping", "Web Desain", "Mobile App Desain"],
         },
         {
           title: "DevOps",
           desc: "Menyiapkan pipeline CI/CD, containerization, dan konfigurasi server agar aplikasi berjalan stabil dengan proses deployment yang efisien.",
-          tags: ["Docker", "CI/CD", "Nginx"],
+          tags: ["Docker", "CI/CD", "Pipeline", "Nginx"],
         },
       ],
     },
@@ -91,17 +91,17 @@ export const translations = {
         {
           title: "Front-End Developer",
           desc: "Translate design to code for applications from scratch using Tailwind, React, and Build Responsive Website.",
-          tags: ["Laravel", "PHP", "React", "Tailwind CSS"],
+          tags: ["Laravel", "React", "Bootstrap", "Tailwind CSS"],
         },
         {
           title: "UI/UX Design",
           desc: "Designing intuitive and aesthetic interfaces using Figma, from wireframes, prototyping, to a design system ready for implementation.",
-          tags: ["Figma", "Wireframing", "Prototyping"],
+          tags: ["Figma", "Wireframing", "Prototyping", "Web Design", "Mobile App Design"],
         },
         {
           title: "DevOps",
           desc: "Setting up CI/CD pipelines, containerization, and server configuration so applications run stably with an efficient deployment process.",
-          tags: ["Docker", "CI/CD", "Nginx"],
+          tags: ["Docker", "CI/CD", "Pipeline","Nginx"],
         },
       ],
     },
