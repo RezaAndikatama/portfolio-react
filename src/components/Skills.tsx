@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { skillsData } from "../data/portfolioData";
 import { useInView } from "../hooks/useInView";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../data/translations";
 
 function FigmaIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
@@ -17,17 +19,19 @@ function FigmaIcon({ className, style }: { className?: string; style?: React.CSS
 
 const ORANGE_FILTER = "brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(346deg) brightness(101%) contrast(101%)";
 
-// Konfigurasi animasi "wave" periodik
+// Konfigurasi animasi wave
 const WAVE_INTERVAL = 4000;
 const WAVE_STAGGER = 0.06;
 const WIPE_DURATION = 0.9;
-
-// PERBAIKAN: Mengubah 'as const' menjadi 'as number[]'
 const WIPE_TIMES = [0, 0.4, 1] as number[];
 
 export default function Skills() {
   const { ref, isInView } = useInView();
   const [waving, setWaving] = useState(false);
+
+  // Ambil state bahasa dari Context
+  const { language } = useLanguage();
+  const t = translations[language].skills;
 
   useEffect(() => {
     const id = setInterval(() => setWaving(true), WAVE_INTERVAL);
@@ -37,11 +41,11 @@ export default function Skills() {
   return (
     <section id="skills" ref={ref} aria-labelledby="skills-title" className="py-20 md:py-28 lg:py-36 px-4 sm:px-6 bg-gray-100 dark:bg-[#030304] transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
+        {/* Header Dinamis Berdasarkan Bahasa */}
         <div className={`text-center mb-12 md:mb-16 lg:mb-20 transition-all duration-700 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <p className="font-mono text-primary font-semibold text-xs sm:text-sm tracking-wider mb-2">My Specialization</p>
+          <p className="font-mono text-primary font-semibold text-xs sm:text-sm tracking-wider mb-2">{t.label}</p>
           <h2 id="skills-title" className="font-serif text-2xl sm:text-3xl md:text-4xl font-semibold uppercase text-gray-900 dark:text-white">
-            Programming <span className="text-primary">Skills</span>
+            {t.headingPart1} <span className="text-primary">{t.headingPart2}</span>
           </h2>
         </div>
 

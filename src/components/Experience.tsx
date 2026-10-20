@@ -4,8 +4,6 @@ import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
 
-// Helper gabung className kondisional — pengganti `cn` dari shadcn/lib-utils,
-// karena project ini tidak pakai path alias "@/lib/utils".
 function cx(...classes: (string | false | undefined | null)[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -13,6 +11,10 @@ function cx(...classes: (string | false | undefined | null)[]) {
 export default function ExperienceSection() {
   const [selectedExp, setSelectedExp] = useState<Experience | null>(null);
   const [activeId, setActiveId] = useState<string>(experienceData[0]?.id ?? "");
+
+  // STATE BARU: Untuk menyimpan URL gambar yang sedang di-preview fullscreen
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+
   const { ref, isInView } = useInView();
   const { language } = useLanguage();
   const t = translations[language].experience;
@@ -40,7 +42,7 @@ export default function ExperienceSection() {
             </h2>
           </div>
 
-          {/* Elastic Accordion Gallery — panel melebar saat di-hover/klik, mengadaptasi konsep elastic-gallery */}
+          {/* Elastic Accordion Gallery */}
           <div className={`flex h-[420px] sm:h-[460px] md:h-[520px] w-full flex-col gap-2 md:flex-row md:gap-4 transition-all duration-700 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             {experienceData.map((exp, index) => {
               const isActive = activeId === exp.id;
@@ -56,17 +58,13 @@ export default function ExperienceSection() {
                     isActive ? "brightness-100" : "brightness-[.6] hover:brightness-90",
                   )}
                 >
-                  {/* Layer latar: gradient gelap + logo raksasa transparan sebagai elemen dekoratif
-                      (pengganti foto asli, karena data pengalaman hanya punya logo, bukan foto full-bleed) */}
                   <div className="absolute inset-0">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-950" />
                     <img src={exp.logo} alt="" aria-hidden="true" className={cx("absolute inset-0 m-auto h-1/2 w-1/2 object-contain opacity-10 transition-transform duration-1000", isActive ? "scale-100" : "scale-110")} />
                     <div className={cx("absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-500", isActive ? "opacity-100" : "opacity-70")} />
                   </div>
 
-                  {/* Konten */}
                   <div className="absolute bottom-0 left-0 right-0 flex h-full flex-col justify-end p-4 md:p-8">
-                    {/* Konten aktif: role, badge, deskripsi singkat, tombol Detail */}
                     <div className={cx("flex flex-col gap-2 transition-all duration-500", isActive ? "translate-y-0 opacity-100 delay-200" : "translate-y-12 opacity-0")}>
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="rounded-full border border-white/30 bg-white/10 px-2 py-1 text-[10px] font-mono font-medium uppercase tracking-wider text-white backdrop-blur-md md:px-3 md:text-xs">{exp.type}</span>
@@ -90,7 +88,6 @@ export default function ExperienceSection() {
                       </button>
                     </div>
 
-                    {/* Konten tidak aktif: nama perusahaan vertikal (desktop) / nomor urut (mobile) */}
                     <div className={cx("absolute bottom-4 left-1/2 -translate-x-1/2 md:bottom-8 transition-all duration-500", isActive ? "opacity-0 scale-50" : "opacity-100 delay-300")}>
                       <span className="hidden whitespace-nowrap text-sm font-bold uppercase tracking-widest text-white [writing-mode:vertical-rl] md:block">{exp.company}</span>
                       <span className="block text-xs font-bold text-white md:hidden">{String(index + 1).padStart(2, "0")}</span>
@@ -118,8 +115,8 @@ export default function ExperienceSection() {
               </button>
             </div>
 
-            {/* Modal Body */}
-            <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar space-y-8">
+            {/* Modal Body (Scrollbar disembunyikan) */}
+            <div className="p-6 md:p-8 overflow-y-auto [scrollbar-width:none] [&-::-webkit-scrollbar]:hidden space-y-8">
               {/* Info Perusahaan */}
               <div className="flex flex-col sm:flex-row gap-5 items-start">
                 <div className="bg-gray-50 dark:bg-white/5 p-3 rounded-2xl border border-gray-100 dark:border-white/5 flex-shrink-0">
@@ -150,7 +147,7 @@ export default function ExperienceSection() {
                 </h5>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {selectedExp.images.map((img, index) => (
-                    <div key={index} className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 relative group cursor-pointer">
+                    <div key={index} className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 relative group cursor-pointer" onClick={() => setPreviewImage(img)} /* MENAMBAHKAN FUNGSI KLIK DISINI */>
                       <img src={img} alt="Dokumentasi Pekerjaan" className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <i className="bx bx-search-alt-2 text-white text-3xl"></i>
@@ -161,6 +158,24 @@ export default function ExperienceSection() {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* --- Overlay Preview Gambar Fullscreen --- */}
+      {previewImage && (
+        <div className="fixed inset-0 z-[200000] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-fadeIn" onClick={() => setPreviewImage(null)} /* Klik background untuk menutup */>
+          {/* Tombol Close Gambar */}
+          <button className="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-primary text-white transition-colors z-10" onClick={() => setPreviewImage(null)}>
+            <i className="bx bx-x text-3xl"></i>
+          </button>
+
+          {/* Gambar Fullscreen */}
+          <img
+            src={previewImage}
+            alt="Preview Fullscreen"
+            className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl animate-[scaleIn_0.2s_ease-out]"
+            onClick={(e) => e.stopPropagation()} /* Agar klik gambar tidak ikut menutup overlay */
+          />
         </div>
       )}
     </>

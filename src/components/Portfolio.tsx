@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+
+// Import Assets
 import sistemOperasional from "../assets/sistemoperasional.png";
 import cekStatus from "../assets/cekstatus.png";
 import dashboard from "../assets/dashboard.png";
@@ -22,16 +24,18 @@ import wasir2 from "../assets/Wasircore - Layanan.png";
 import wasir3 from "../assets/Wasircore - About Us.png";
 import wasir4 from "../assets/Wasircore - Blog Edukasi Kesehatan.png";
 import wasir5 from "../assets/Wasircore - Contact Us.png";
+
+// Import Hooks & Context
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
 
-// 1. Tambahkan 'category' ke dalam interface
-interface PortfolioItem {
+export interface PortfolioItem {
   id: number;
   title: string;
   img: string;
   desc: string;
+  problem: string;
   techStack: string[];
   images: string[];
   category: string;
@@ -39,8 +43,10 @@ interface PortfolioItem {
 
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
-  // 2. Tambahkan state untuk filter aktif
   const [activeFilter, setActiveFilter] = useState<string>("All");
+
+  // STATE BARU: Untuk menyimpan URL gambar yang sedang di-preview fullscreen
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const { ref, isInView } = useInView();
   const { language } = useLanguage();
@@ -56,13 +62,14 @@ export default function Portfolio() {
     document.body.style.overflow = "";
   };
 
-  // 3. Tambahkan data 'category' pada masing-masing item
+  // Data Portfolio
   const portfolios: PortfolioItem[] = [
     {
       id: 1,
       title: "Learning Management System",
       img: thumbnailLMS,
       desc: "Mengembangkan dan men-deploy platform E-Learning berbasis Moodle 5 di lingkungan terkontainerisasi. Proyek ini memecahkan masalah beban server pada aplikasi monolith dengan mendelegasikan tugas asinkron (sistem notifikasi email otomatis) ke microservice Node.js yang berdiri sendiri.",
+      problem: "Tingginya beban server pada aplikasi monolith saat memproses tugas asinkron seperti pengiriman email massal, yang menyebabkan performa LMS menurun drastis saat diakses banyak pengguna.",
       techStack: ["Moodle", "Docker", "Node.js", "Nginx", "Pipeline"],
       images: [lms1, lms2],
       category: "DevOps",
@@ -72,7 +79,8 @@ export default function Portfolio() {
       title: "Sistem Operasional Bengkel Manufaktur",
       img: sistemOperasional,
       desc: "Sebuah sistem informasi berbasis web yang dirancang khusus untuk mendigitalisasi dan mengoptimalkan proses operasional manajemen PT Briliant Teknik Mandiri. Aplikasi ini dibangun dengan arsitektur modern berbasis container (Docker) untuk memastikan skalabilitas dan stabilitas di lingkungan production, serta didukung oleh pipeline otomatisasi untuk efisiensi pengembangan.",
-      techStack: ["Laravel", "Tailwind CSS", "PHP","Docker", "MySQL", "CI/CD"],
+      problem: "Proses pencatatan operasional dan manajemen bengkel yang sebelumnya masih manual, menyebabkan inefisiensi waktu, rentan terhadap kehilangan data, dan menyulitkan pemantauan status produksi secara real-time.",
+      techStack: ["Laravel", "Tailwind CSS", "PHP", "Docker", "MySQL", "CI/CD"],
       images: [cekStatus, dashboard, dokumentasiBTM, dokumentasiBTM2],
       category: "Web App",
     },
@@ -81,6 +89,7 @@ export default function Portfolio() {
       title: "Banking App UI",
       img: ssUI,
       desc: "Sebuah konsep ulang pengalaman perbankan digital yang berfokus pada kemudahan pengguna, keamanan, dan pengelolaan finansial yang lebih personal. Proyek ini bertujuan mengubah antarmuka perbankan tradisional yang kaku menjadi lebih ramah, modern, dan intuitif, khususnya bagi milenial dan Gen Z.",
+      problem: "Antarmuka aplikasi perbankan tradisional yang kaku, kompleks, dan kurang intuitif, sehingga membuat pengguna muda merasa kesulitan dan kurang nyaman dalam mengelola keuangan harian mereka.",
       techStack: ["Figma", "Wireframing", "Prototyping"],
       images: [ssUI, thumbnails],
       category: "UI/UX",
@@ -89,8 +98,9 @@ export default function Portfolio() {
       id: 4,
       title: "Noka UI",
       img: noka1,
-      desc: "Sebelumnya, calon jemaah sering kali kesulitan mendapatkan informasi perjalanan umrah yang kredibel dan detail karena keterbatasan platform digital yang usang serta tidak interaktif. Masalah ini diselesaikan melalui pengembangan landing page modern yang tidak hanya informatif, tetapi juga dilengkapi dengan navigasi interaktif, optimasi SEO tingkat tinggi untuk memperluas jangkauan, serta visualisasi yang mempermudah proses pengambilan keputusan jemaah secara aman dan nyaman..",
-      techStack: ["Figma", "Wireframing", "Protoryping", "Tailwind CSS", "HTML"],
+      desc: "Sebelumnya, calon jemaah sering kali kesulitan mendapatkan informasi perjalanan umrah yang kredibel dan detail karena keterbatasan platform digital yang usang serta tidak interaktif. Masalah ini diselesaikan melalui pengembangan landing page modern yang tidak hanya informatif, tetapi juga dilengkapi dengan navigasi interaktif, optimasi SEO tingkat tinggi untuk memperluas jangkauan, serta visualisasi yang mempermudah proses pengambilan keputusan jemaah secara aman dan nyaman.",
+      problem: "Calon jemaah sering kali kesulitan mendapatkan informasi perjalanan umrah yang kredibel dan detail karena keterbatasan platform digital yang usang, tidak interaktif, dan sulit diakses di perangkat seluler.",
+      techStack: ["Figma", "Wireframing", "Prototyping", "Tailwind CSS", "HTML"],
       images: [noka1, noka2, noka3],
       category: "UI/UX",
     },
@@ -98,31 +108,27 @@ export default function Portfolio() {
       id: 5,
       title: "Wasircore UI",
       img: wasirThumb,
-      desc: "Menghadapi tantangan rendahnya kesadaran dan tingginya rasa cemas masyarakat dalam mencari pengobatan medis yang aman untuk penyakit sensitif seperti wasir, proyek ini merevolusi platform edukasi dan layanan kesehatan digital. Melalui pendekatan desain UI yang ramah, intuitif, dan bebas intimidasi, kami memecahkan masalah aksesibilitas informasi medis dengan menghadirkan visualisasi yang menenangkan, fitur konsultasi cepat, serta hierarki konten yang efektif guna membangun rasa percaya dan mempercepat konversi pasien.  ",
+      desc: "Menghadapi tantangan rendahnya kesadaran dan tingginya rasa cemas masyarakat dalam mencari pengobatan medis yang aman untuk penyakit sensitif seperti wasir, proyek ini merevolusi platform edukasi dan layanan kesehatan digital. Melalui pendekatan desain UI yang ramah, intuitif, dan bebas intimidasi, kami memecahkan masalah aksesibilitas informasi medis dengan menghadirkan visualisasi yang menenangkan, fitur konsultasi cepat, serta hierarki konten yang efektif guna membangun rasa percaya dan mempercepat konversi pasien.",
+      problem: "Rendahnya kesadaran dan tingginya rasa cemas atau malu di masyarakat dalam mencari pengobatan medis yang aman untuk penyakit sensitif seperti wasir, diperparah dengan informasi medis yang beredar seringkali mengintimidasi.",
       techStack: ["Figma", "Wireframing", "Prototyping"],
       images: [wasir1, wasir2, wasir3, wasir4, wasir5],
       category: "UI/UX",
     },
   ];
 
-  // 4. Buat array kategori unik dari data portfolio
   const categories = ["All", "Web App", "UI/UX", "DevOps"];
-
-  // 5. Filter data berdasarkan kategori yang dipilih
   const filteredPortfolios = activeFilter === "All" ? portfolios : portfolios.filter((item) => item.category === activeFilter);
 
   return (
     <>
       <section id="portfolio" ref={ref} aria-labelledby="portfolio-title" className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
           <div className={`text-center mb-8 transition-all duration-700 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             <p className="font-mono text-primary font-semibold tracking-wider mb-2">{t.label}</p>
             <h2 id="portfolio-title" className="font-serif text-3xl md:text-4xl font-semibold uppercase text-gray-900 dark:text-white mb-6">
               {t.heading}
             </h2>
 
-            {/* Button Filter */}
             <div className="flex flex-wrap justify-center gap-3">
               {categories.map((category) => (
                 <button
@@ -150,7 +156,6 @@ export default function Portfolio() {
             }}
             className="pb-4"
           >
-            {/* Menggunakan data yang sudah di-filter (filteredPortfolios) */}
             {filteredPortfolios.map((item, index) => (
               <SwiperSlide key={item.id} className="h-auto">
                 <article
@@ -161,8 +166,9 @@ export default function Portfolio() {
                 >
                   <img src={item.img} alt={`Preview of ${item.title}`} className="w-full h-48 object-cover rounded-xl mb-5" />
                   <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">{item.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow">{item.desc}</p>
-                  <button onClick={() => openModal(item)} className="inline-block text-center text-white bg-primary hover:bg-orange-600 rounded-full py-2 px-6 font-medium transition-colors">
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow line-clamp-3">{item.desc}</p>
+
+                  <button onClick={() => openModal(item)} className="inline-block text-center text-white bg-primary hover:bg-orange-600 rounded-full py-2 px-6 font-medium transition-colors w-full sm:w-auto">
                     {t.detailButton}
                   </button>
                 </article>
@@ -170,7 +176,6 @@ export default function Portfolio() {
             ))}
           </Swiper>
 
-          {/* Navigasi Swiper disembunyikan jika hasil filter kurang dari atau sama dengan jumlah item per view di desktop (opsional) */}
           {filteredPortfolios.length > 1 && (
             <div className="flex items-center justify-end gap-3 mt-6">
               <button
@@ -190,7 +195,7 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* --- Modal Detail Project --- */}
+      {/* --- Modal Detail Project (Popup) --- */}
       {selectedProject && (
         <div className="fixed inset-0 z-[100000] flex items-center justify-center bg-black/70 backdrop-blur-md px-4 animate-fadeIn" aria-modal="true" role="dialog" onClick={closeModal}>
           <div
@@ -205,9 +210,8 @@ export default function Portfolio() {
               </button>
             </div>
 
-            {/* Modal Body */}
-            <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar space-y-8">
-              {/* Deskripsi */}
+            {/* Modal Body (Scrollbar disembunyikan) */}
+            <div className="p-6 md:p-8 overflow-y-auto [scrollbar-width:none] [&-::-webkit-scrollbar]:hidden space-y-8">
               <div>
                 <h5 className="font-mono text-xs font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wider flex items-center gap-2">
                   <i className="bx bx-file text-primary text-lg"></i> {t.modalDesc}
@@ -215,7 +219,13 @@ export default function Portfolio() {
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base bg-gray-50 dark:bg-white/5 p-5 rounded-2xl border border-gray-100 dark:border-white/5">{selectedProject.desc}</p>
               </div>
 
-              {/* Tech Stack */}
+              <div>
+                <h5 className="font-mono text-xs font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wider flex items-center gap-2">
+                  <i className="bx bx-target-lock text-primary text-lg"></i> CASE & PROBLEM
+                </h5>
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm md:text-base bg-orange-50/50 dark:bg-primary/5 p-5 rounded-2xl border border-orange-100 dark:border-primary/10">{selectedProject.problem}</p>
+              </div>
+
               <div>
                 <h5 className="font-mono text-xs font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wider flex items-center gap-2">
                   <i className="bx bx-code-alt text-primary text-lg"></i> {t.modalTechStack}
@@ -229,14 +239,14 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              {/* Galeri */}
+              {/* Galeri Project */}
               <div>
                 <h5 className="font-mono text-xs font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wider flex items-center gap-2">
                   <i className="bx bx-images text-primary text-lg"></i> {t.modalGallery}
                 </h5>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {selectedProject.images.map((img, index) => (
-                    <div key={index} className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 relative group cursor-pointer">
+                    <div key={index} className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 relative group cursor-pointer" onClick={() => setPreviewImage(img)} /* MENAMBAHKAN FUNGSI KLIK DISINI */>
                       <img src={img} alt={`Dokumentasi ${selectedProject.title}`} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <i className="bx bx-search-alt-2 text-white text-3xl"></i>
@@ -247,6 +257,24 @@ export default function Portfolio() {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* --- Overlay Preview Gambar Fullscreen --- */}
+      {previewImage && (
+        <div className="fixed inset-0 z-[200000] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-fadeIn" onClick={() => setPreviewImage(null)} /* Klik background untuk menutup */>
+          {/* Tombol Close Gambar */}
+          <button className="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-primary text-white transition-colors z-10" onClick={() => setPreviewImage(null)}>
+            <i className="bx bx-x text-3xl"></i>
+          </button>
+
+          {/* Gambar Fullscreen */}
+          <img
+            src={previewImage}
+            alt="Preview Fullscreen"
+            className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl animate-[scaleIn_0.2s_ease-out]"
+            onClick={(e) => e.stopPropagation()} /* Agar klik gambar tidak ikut menutup overlay */
+          />
         </div>
       )}
     </>

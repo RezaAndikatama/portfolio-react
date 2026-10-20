@@ -10,14 +10,14 @@ export const translations = {
     },
     hero: {
       badge: "Terbuka untuk Kerja",
-      headingLine1: "Front-End Developer,",
-      headingLine2: "UI/UX Design & DevOps.",
+      headingLine1: "Web Developer",
+      headingLine2: "Front-end & UI/UX Designer.",
       subheading: "Berbasis di Jakarta",
-      bio: "Hi, saya Reza Andikatama — developer kreatif yang senang menciptakan pengalaman digital yang mulus, terhubung, dan berdampak.",
+      bio: "Hi, saya Reza Andikatama — Lulusan Sistem Informasi dengan pengalaman DevOps & IT Support. Memadukan keahlian infrastruktur dengan minat kuat pada Web/Frontend, UI/UX, dan QA untuk menciptakan produk digital yang andal secara menyeluruh.",
       cta: "Lihat karya saya",
     },
     services: {
-      label: "Apa yang Saya Kerjakan",
+      label: "Keahlian",
       heading: "Layanan Saya",
       items: [
         {
@@ -38,13 +38,13 @@ export const translations = {
       ],
     },
     skills: {
-      label: "Spesialisasi Saya",
-      headingPart1: "Kemampuan",
-      headingPart2: "Programming",
+      label: "Kemampuan Saya",
+      headingPart1: "Tools &",
+      headingPart2: "Framework",
     },
     portfolio: {
       label: "Portofolio",
-      heading: "Karya Pilihan",
+      heading: "Karya Saya",
       detailButton: "Detail",
       modalDesc: "Deskripsi Project",
       modalTechStack: "Tech Stack",
@@ -78,10 +78,10 @@ export const translations = {
     },
     hero: {
       badge: "Available for Work",
-      headingLine1: "Front-End Developer,",
-      headingLine2: "UI/UX Design & DevOps.",
+      headingLine1: "Web Developer,",
+      headingLine2: "Front-end & UI/UX Designer.",
       subheading: "Based in Jakarta",
-      bio: "Hi, I'm Reza Andikatama — a creative developer passionate about creating seamless digital experiences that connect and convert.",
+      bio: "Hi, I'm Reza Andikatama — Information Systems graduate with a background in DevOps & IT Support. Bridging infrastructure expertise with a strong passion for Web/Frontend, UI/UX, and QA to build reliable, end-to-end digital products.",
       cta: "See my works",
     },
     services: {
@@ -101,14 +101,14 @@ export const translations = {
         {
           title: "DevOps",
           desc: "Setting up CI/CD pipelines, containerization, and server configuration so applications run stably with an efficient deployment process.",
-          tags: ["Docker", "CI/CD", "Pipeline","Nginx"],
+          tags: ["Docker", "CI/CD", "Pipeline", "Nginx"],
         },
       ],
     },
     skills: {
       label: "My Specialization",
-      headingPart1: "Programming",
-      headingPart2: "Skills",
+      headingPart1: "Tools &",
+      headingPart2: "Framework",
     },
     portfolio: {
       label: "Portfolio",

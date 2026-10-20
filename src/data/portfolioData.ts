@@ -17,18 +17,18 @@ export interface Skill {
 }
 
 export const skillsData: Skill[] = [
-  { id: 1, name: "JavaScript", icon: "devicon-javascript-plain", desc: "Membangun interaksi dinamis dan logika pada sisi client maupun server." },
-  { id: 2, name: "Tailwind CSS", icon: "devicon-tailwindcss-plain", desc: "Styling cepat dan konsisten dengan utility-first CSS framework modern." },
-  { id: 3, name: "PHP", icon: "devicon-php-plain", desc: "Mengembangkan backend web dengan bahasa server-side yang powerful." },
-  { id: 4, name: "Laravel", icon: "devicon-laravel-plain", desc: "Framework PHP modern untuk membangun aplikasi web yang terstruktur." },
-  { id: 5, name: "Next JS", icon: "devicon-nextjs-plain", desc: "Membangun aplikasi React dengan SSR dan SSG untuk performa optimal." },
-  { id: 6, name: "Git", icon: "devicon-git-plain", desc: "Version control untuk kolaborasi dan manajemen kode secara efisien." },
-  { id: 7, name: "React", icon: "devicon-react-plain", desc: "Membangun antarmuka pengguna berbasis komponen yang reusable." },
-  { id: 8, name: "Figma", icon: "devicon-figma-plain", desc: "Merancang UI/UX Website dan Mobile." },
-  { id: 9, name: "HTML5", icon: "devicon-html5-plain", desc: "Struktur dasar semantik untuk setiap halaman web yang dibangun." },
-  { id: 10, name: "MySQL", icon: "devicon-mysql-plain", desc: "Mengelola basis data relasional untuk penyimpanan data aplikasi." },
-  { id: 11, name: "Docker", icon: "devicon-docker-plain", desc: "Containerization untuk lingkungan development yang konsisten." },
-  { id: 12, name: "CSS3", icon: "devicon-css3-plain", desc: "Styling tampilan web dengan layout, animasi, dan desain responsif." },
+  { id: 1, name: "HTML5", icon: "devicon-html5-plain", desc: "Struktur dasar semantik untuk setiap halaman web yang dibangun." },
+  { id: 2, name: "CSS", icon: "devicon-css3-plain", desc: "Styling tampilan web dengan layout, animasi, dan desain responsif." },
+  { id: 3, name: "JavaScript", icon: "devicon-javascript-plain", desc: "Membangun interaksi dinamis dan logika pada sisi client maupun server." },
+  { id: 4, name: "Bootstrap 5", icon: "devicon-bootstrap-plain", desc: "Styling tampilan web dengan layout, animasi, dan desain responsif." },
+  { id: 5, name: "Tailwind CSS", icon: "devicon-tailwindcss-plain", desc: "Styling cepat dan konsisten dengan utility-first CSS framework modern." },
+  { id: 6, name: "PHP", icon: "devicon-php-plain", desc: "Mengembangkan backend web dengan bahasa server-side yang powerful." },
+  { id: 7, name: "Laravel", icon: "devicon-laravel-plain", desc: "Framework PHP modern untuk membangun aplikasi web yang terstruktur." },
+  { id: 8, name: "GitHub", icon: "devicon-github-original", desc: "Version control dan kolaborasi manajemen kode secara efisien." },
+  { id: 9, name: "React", icon: "devicon-react-plain", desc: "Membangun antarmuka pengguna berbasis komponen yang reusable." },
+  { id: 10, name: "Figma", icon: "devicon-figma-plain", desc: "Merancang UI/UX Website dan Mobile." },
+  { id: 11, name: "MySQL", icon: "devicon-mysql-plain", desc: "Mengelola basis data relasional untuk penyimpanan data aplikasi." },
+  { id: 12, name: "Docker", icon: "devicon-docker-plain", desc: "Containerization untuk lingkungan development yang konsisten." },
 ];
 
 // --- EXPERIENCE DATA ---
@@ -66,7 +66,7 @@ export const experienceData: Experience[] = [
   },
   {
     id: "anteraja",
-    role: "Courier Delivery",
+    role: "Delivery Specialist",
     company: "PT. Tri Adi Bersama (AnterAja)",
     date: "Ags 2021 - Jan 2022",
     type: "Contract",
@@ -76,7 +76,7 @@ export const experienceData: Experience[] = [
   },
   {
     id: "kkp",
-    role: "DevOps",
+    role: "Junior DevOps",
     company: "Kementerian Kelautan dan Perikanan",
     date: "Sep 2025 - Des 2025",
     type: "Internship",
