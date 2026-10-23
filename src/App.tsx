@@ -1,26 +1,28 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import About from "./components/About";
+import Services from "./components/Services";
 import Portfolio from "./components/Portfolio";
 import Skills from "./components/Skills";
 import ExperienceSection from "./components/Experience";
 import Contact from "./components/Contact";
 import { LanguageProvider } from "./context/LanguageContext";
+import { KineticTypographyLoader } from "./components/LoadingAnimation";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
   const [fadeSplash, setFadeSplash] = useState(false);
 
-  // Splash screen logic
   useEffect(() => {
+    // 1 siklus kata = 3000ms. Untuk 3 kata butuh waktu sekitar 8-9 detik.
+    // Fade out dimulai pada detik ke-8 saat kata "WELCOME" sedang tampil penuh.
     const timer1 = setTimeout(() => {
-      setFadeSplash(true); // Mulai animasi fade out
-    }, 1200);
+      setFadeSplash(true);
+    }, 8000);
 
     const timer2 = setTimeout(() => {
-      setShowSplash(false); // Hapus splash screen dari DOM
-    }, 1900); // 1200 + 700ms animasi
+      setShowSplash(false);
+    }, 8700);
 
     return () => {
       clearTimeout(timer1);
@@ -33,17 +35,8 @@ function App() {
       <div className="bg-gray-50 text-gray-800 dark:bg-darkbg dark:text-gray-200 font-sans antialiased transition-colors duration-300 relative overflow-x-hidden min-h-screen">
         {/* Splash Screen Component */}
         {showSplash && (
-          <div
-            className={`fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-gray-50 dark:bg-darkbg transition-all duration-700 ease-in-out ${fadeSplash ? "opacity-0 pointer-events-none -translate-y-full" : "opacity-100"}`}
-          >
-            <div className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-widest animate-pulse mb-6 text-center">
-              Welcome <span className="text-primary">To</span>
-            </div>
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-primary animate-bounce" style={{ animationDelay: "0s" }}></div>
-              <div className="w-3 h-3 rounded-full bg-primary animate-bounce" style={{ animationDelay: "0.15s" }}></div>
-              <div className="w-3 h-3 rounded-full bg-primary animate-bounce" style={{ animationDelay: "0.3s" }}></div>
-            </div>
+          <div className={`fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-black transition-all duration-700 ease-in-out ${fadeSplash ? "opacity-0 pointer-events-none -translate-y-full" : "opacity-100"}`}>
+            <KineticTypographyLoader />
           </div>
         )}
 
@@ -55,7 +48,7 @@ function App() {
 
         <main>
           <Hero />
-          <About />
+          <Services />
           <Portfolio />
           <Skills />
           <ExperienceSection />

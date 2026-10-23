@@ -1,56 +1,35 @@
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-// Import Assets
-import sistemOperasional from "../assets/sistemoperasional.png";
-import cekStatus from "../assets/cekstatus.png";
-import dashboard from "../assets/dashboard.png";
-import dokumentasiBTM from "../assets/dokBTM.jpeg";
-import dokumentasiBTM2 from "../assets/dokBTM2.jpeg";
-import thumbnails from "../assets/thumbnail.png";
-import ssUI from "../assets/uiux.png";
-import thumbnailLMS from "../assets/homelms.png";
-import lms1 from "../assets/lms1.png";
-import lms2 from "../assets/lms2.png";
-import noka1 from "../assets/noka1.png";
-import noka2 from "../assets/noka2.png";
-import noka3 from "../assets/noka3.png";
-import wasirThumb from "../assets/wasitThumbnail.png";
-import wasir1 from "../assets/Wasircore - Home Page.png";
-import wasir2 from "../assets/Wasircore - Layanan.png";
-import wasir3 from "../assets/Wasircore - About Us.png";
-import wasir4 from "../assets/Wasircore - Blog Edukasi Kesehatan.png";
-import wasir5 from "../assets/Wasircore - Contact Us.png";
+// 1. Mengambil data dan interface dari file data terpisah
+import { portfolios, type PortfolioItem } from "../data/portfolioData";
 
-// Import Hooks & Context
+// 2. Import Hooks & Context
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
 
-export interface PortfolioItem {
-  id: number;
-  title: string;
-  img: string;
-  desc: string;
-  problem: string;
-  techStack: string[];
-  images: string[];
-  category: string;
-}
+const paginationButtonClass =
+  "inline-flex h-9 items-center justify-center whitespace-nowrap rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm shadow-black/5 transition-colors hover:border-primary/40 hover:bg-primary/10 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/70 disabled:pointer-events-none disabled:opacity-50 [&.swiper-button-disabled]:pointer-events-none [&.swiper-button-disabled]:opacity-50 dark:border-white/10 dark:bg-cardDark dark:text-gray-200";
 
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("All");
 
-  // STATE BARU: Untuk menyimpan URL gambar yang sedang di-preview fullscreen
+  // STATE: Untuk menyimpan URL gambar yang sedang di-preview fullscreen
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const { ref, isInView } = useInView();
   const { language } = useLanguage();
   const t = translations[language].portfolio;
+
+  // Label tombol pagination mengikuti bahasa yang aktif
+  const prevLabel = language === "id" ? "Sebelumnya" : "Previous";
+  const nextLabel = language === "id" ? "Berikutnya" : "Next";
 
   const openModal = (item: PortfolioItem) => {
     setSelectedProject(item);
@@ -62,66 +41,12 @@ export default function Portfolio() {
     document.body.style.overflow = "";
   };
 
-  // Data Portfolio
-  const portfolios: PortfolioItem[] = [
-    {
-      id: 1,
-      title: "Learning Management System",
-      img: thumbnailLMS,
-      desc: "Mengembangkan dan men-deploy platform E-Learning berbasis Moodle 5 di lingkungan terkontainerisasi. Proyek ini memecahkan masalah beban server pada aplikasi monolith dengan mendelegasikan tugas asinkron (sistem notifikasi email otomatis) ke microservice Node.js yang berdiri sendiri.",
-      problem: "Tingginya beban server pada aplikasi monolith saat memproses tugas asinkron seperti pengiriman email massal, yang menyebabkan performa LMS menurun drastis saat diakses banyak pengguna.",
-      techStack: ["Moodle", "Docker", "Node.js", "Nginx", "Pipeline"],
-      images: [lms1, lms2],
-      category: "DevOps",
-    },
-    {
-      id: 2,
-      title: "Sistem Operasional Bengkel Manufaktur",
-      img: sistemOperasional,
-      desc: "Sebuah sistem informasi berbasis web yang dirancang khusus untuk mendigitalisasi dan mengoptimalkan proses operasional manajemen PT Briliant Teknik Mandiri. Aplikasi ini dibangun dengan arsitektur modern berbasis container (Docker) untuk memastikan skalabilitas dan stabilitas di lingkungan production, serta didukung oleh pipeline otomatisasi untuk efisiensi pengembangan.",
-      problem: "Proses pencatatan operasional dan manajemen bengkel yang sebelumnya masih manual, menyebabkan inefisiensi waktu, rentan terhadap kehilangan data, dan menyulitkan pemantauan status produksi secara real-time.",
-      techStack: ["Laravel", "Tailwind CSS", "PHP", "Docker", "MySQL", "CI/CD"],
-      images: [cekStatus, dashboard, dokumentasiBTM, dokumentasiBTM2],
-      category: "Web App",
-    },
-    {
-      id: 3,
-      title: "Banking App UI",
-      img: ssUI,
-      desc: "Sebuah konsep ulang pengalaman perbankan digital yang berfokus pada kemudahan pengguna, keamanan, dan pengelolaan finansial yang lebih personal. Proyek ini bertujuan mengubah antarmuka perbankan tradisional yang kaku menjadi lebih ramah, modern, dan intuitif, khususnya bagi milenial dan Gen Z.",
-      problem: "Antarmuka aplikasi perbankan tradisional yang kaku, kompleks, dan kurang intuitif, sehingga membuat pengguna muda merasa kesulitan dan kurang nyaman dalam mengelola keuangan harian mereka.",
-      techStack: ["Figma", "Wireframing", "Prototyping"],
-      images: [ssUI, thumbnails],
-      category: "UI/UX",
-    },
-    {
-      id: 4,
-      title: "Noka UI",
-      img: noka1,
-      desc: "Sebelumnya, calon jemaah sering kali kesulitan mendapatkan informasi perjalanan umrah yang kredibel dan detail karena keterbatasan platform digital yang usang serta tidak interaktif. Masalah ini diselesaikan melalui pengembangan landing page modern yang tidak hanya informatif, tetapi juga dilengkapi dengan navigasi interaktif, optimasi SEO tingkat tinggi untuk memperluas jangkauan, serta visualisasi yang mempermudah proses pengambilan keputusan jemaah secara aman dan nyaman.",
-      problem: "Calon jemaah sering kali kesulitan mendapatkan informasi perjalanan umrah yang kredibel dan detail karena keterbatasan platform digital yang usang, tidak interaktif, dan sulit diakses di perangkat seluler.",
-      techStack: ["Figma", "Wireframing", "Prototyping", "Tailwind CSS", "HTML"],
-      images: [noka1, noka2, noka3],
-      category: "UI/UX",
-    },
-    {
-      id: 5,
-      title: "Wasircore UI",
-      img: wasirThumb,
-      desc: "Menghadapi tantangan rendahnya kesadaran dan tingginya rasa cemas masyarakat dalam mencari pengobatan medis yang aman untuk penyakit sensitif seperti wasir, proyek ini merevolusi platform edukasi dan layanan kesehatan digital. Melalui pendekatan desain UI yang ramah, intuitif, dan bebas intimidasi, kami memecahkan masalah aksesibilitas informasi medis dengan menghadirkan visualisasi yang menenangkan, fitur konsultasi cepat, serta hierarki konten yang efektif guna membangun rasa percaya dan mempercepat konversi pasien.",
-      problem: "Rendahnya kesadaran dan tingginya rasa cemas atau malu di masyarakat dalam mencari pengobatan medis yang aman untuk penyakit sensitif seperti wasir, diperparah dengan informasi medis yang beredar seringkali mengintimidasi.",
-      techStack: ["Figma", "Wireframing", "Prototyping"],
-      images: [wasir1, wasir2, wasir3, wasir4, wasir5],
-      category: "UI/UX",
-    },
-  ];
-
   const categories = ["All", "Web App", "UI/UX", "DevOps"];
   const filteredPortfolios = activeFilter === "All" ? portfolios : portfolios.filter((item) => item.category === activeFilter);
 
   return (
     <>
-      <section id="portfolio" ref={ref} aria-labelledby="portfolio-title" className="py-20 px-6">
+      <section id="portfolio" ref={ref} aria-labelledby="portfolio-title" className="py-20 px-6 bg-gray-50 dark:bg-[#030304] transition-colors duration-300">
         <div className="max-w-7xl mx-auto">
           <div className={`text-center mb-8 transition-all duration-700 ease-out ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             <p className="font-mono text-primary font-semibold tracking-wider mb-2">{t.label}</p>
@@ -176,21 +101,24 @@ export default function Portfolio() {
             ))}
           </Swiper>
 
+          {/* Pagination */}
           {filteredPortfolios.length > 1 && (
-            <div className="flex items-center justify-end gap-3 mt-6">
-              <button
-                aria-label="Previous slide"
-                className="btn-prev w-10 h-10 flex items-center justify-center rounded-lg bg-gray-200 dark:bg-white/10 text-gray-800 dark:text-white hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors"
-              >
-                <i className="bx bx-left-arrow-alt text-xl"></i>
-              </button>
-              <button
-                aria-label="Next slide"
-                className="btn-next w-10 h-10 flex items-center justify-center rounded-lg bg-gray-200 dark:bg-white/10 text-gray-800 dark:text-white hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors"
-              >
-                <i className="bx bx-right-arrow-alt text-xl"></i>
-              </button>
-            </div>
+            <nav role="navigation" aria-label="pagination" className="mx-auto mt-6 flex w-full justify-center">
+              <ul className="flex w-full items-center justify-between gap-3">
+                <li>
+                  <button type="button" className={`btn-prev ${paginationButtonClass}`}>
+                    <ChevronLeft className="-ml-1 mr-2 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
+                    {prevLabel}
+                  </button>
+                </li>
+                <li>
+                  <button type="button" className={`btn-next ${paginationButtonClass}`}>
+                    {nextLabel}
+                    <ChevronRight className="-mr-1 ml-2 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
+                  </button>
+                </li>
+              </ul>
+            </nav>
           )}
         </div>
       </section>
@@ -202,7 +130,6 @@ export default function Portfolio() {
             className="bg-white dark:bg-cardDark w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-gray-200 dark:border-white/10 animate-[scaleIn_0.3s_ease-out]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
             <div className="p-6 border-b border-gray-200 dark:border-white/10 flex justify-between items-center bg-gray-50/50 dark:bg-black/20">
               <h3 className="font-serif text-xl md:text-2xl font-semibold text-gray-900 dark:text-white">{selectedProject.title}</h3>
               <button onClick={closeModal} className="w-9 h-9 flex items-center justify-center rounded-xl bg-gray-200 dark:bg-white/10 text-gray-500 hover:text-white hover:bg-primary transition-colors">
@@ -210,8 +137,7 @@ export default function Portfolio() {
               </button>
             </div>
 
-            {/* Modal Body (Scrollbar disembunyikan) */}
-            <div className="p-6 md:p-8 overflow-y-auto [scrollbar-width:none] [&-::-webkit-scrollbar]:hidden space-y-8">
+            <div className="p-6 md:p-8 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden space-y-8">
               <div>
                 <h5 className="font-mono text-xs font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wider flex items-center gap-2">
                   <i className="bx bx-file text-primary text-lg"></i> {t.modalDesc}
@@ -239,14 +165,13 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              {/* Galeri Project */}
               <div>
                 <h5 className="font-mono text-xs font-bold text-gray-900 dark:text-white mb-3 uppercase tracking-wider flex items-center gap-2">
                   <i className="bx bx-images text-primary text-lg"></i> {t.modalGallery}
                 </h5>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {selectedProject.images.map((img, index) => (
-                    <div key={index} className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 relative group cursor-pointer" onClick={() => setPreviewImage(img)} /* MENAMBAHKAN FUNGSI KLIK DISINI */>
+                    <div key={index} className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/10 relative group cursor-pointer" onClick={() => setPreviewImage(img)}>
                       <img src={img} alt={`Dokumentasi ${selectedProject.title}`} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <i className="bx bx-search-alt-2 text-white text-3xl"></i>
@@ -262,19 +187,11 @@ export default function Portfolio() {
 
       {/* --- Overlay Preview Gambar Fullscreen --- */}
       {previewImage && (
-        <div className="fixed inset-0 z-[200000] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-fadeIn" onClick={() => setPreviewImage(null)} /* Klik background untuk menutup */>
-          {/* Tombol Close Gambar */}
+        <div className="fixed inset-0 z-[200000] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-fadeIn" onClick={() => setPreviewImage(null)}>
           <button className="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-primary text-white transition-colors z-10" onClick={() => setPreviewImage(null)}>
             <i className="bx bx-x text-3xl"></i>
           </button>
-
-          {/* Gambar Fullscreen */}
-          <img
-            src={previewImage}
-            alt="Preview Fullscreen"
-            className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl animate-[scaleIn_0.2s_ease-out]"
-            onClick={(e) => e.stopPropagation()} /* Agar klik gambar tidak ikut menutup overlay */
-          />
+          <img src={previewImage} alt="Preview Fullscreen" className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl animate-[scaleIn_0.2s_ease-out]" onClick={(e) => e.stopPropagation()} />
         </div>
       )}
     </>

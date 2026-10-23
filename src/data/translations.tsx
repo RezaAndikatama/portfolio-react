@@ -2,6 +2,7 @@ export const translations = {
   id: {
     nav: {
       home: "Beranda",
+      about: "Tentang",
       services: "Layanan",
       experience: "Pengalaman",
       skills: "Keahlian",
@@ -9,12 +10,21 @@ export const translations = {
       contact: "Kontak",
     },
     hero: {
-      badge: "Terbuka untuk Kerja",
-      headingLine1: "Web Developer",
+      headingLine1: "Web Developer,",
       headingLine2: "Front-end & UI/UX Designer.",
       subheading: "Berbasis di Jakarta",
-      bio: "Hi, saya Reza Andikatama — Lulusan Sistem Informasi dengan pengalaman DevOps & IT Support. Memadukan keahlian infrastruktur dengan minat kuat pada Web/Frontend, UI/UX, dan QA untuk menciptakan produk digital yang andal secara menyeluruh.",
+      bio: "Hi, saya Reza. Merancang antarmuka intuitif dan membangun performa web yang solid di balik layar.",
       cta: "Lihat karya saya",
+    },
+    about: {
+      label: "Tentang Saya",
+      heading: "Mengenal Lebih Dekat",
+      bio1: "Saya seorang Lulusan Sistem Informasi dengan latar belakang di bidang DevOps, IT Support, serta minat mendalam pada pengembangan Frontend dan UI/UX Design.",
+      bio2: "Memadukan pemahaman infrastruktur teknis dengan kepekaan desain antarmuka, saya berfokus menciptakan aplikasi web yang tidak hanya memiliki tampilan menarik, tetapi juga responsif, performan, dan mudah digunakan.",
+      educationLabel: "Pendidikan",
+      educationDegree: "S1 Sistem Informasi",
+      locationLabel: "Lokasi",
+      locationCity: "Jakarta, Indonesia",
     },
     services: {
       label: "Keahlian",
@@ -44,7 +54,7 @@ export const translations = {
     },
     portfolio: {
       label: "Portofolio",
-      heading: "Karya Saya",
+      heading: "Menampilkan",
       detailButton: "Detail",
       modalDesc: "Deskripsi Project",
       modalTechStack: "Tech Stack",
@@ -70,6 +80,7 @@ export const translations = {
   en: {
     nav: {
       home: "Home",
+      about: "About",
       services: "Services",
       experience: "Experience",
       skills: "Skills",
@@ -77,12 +88,21 @@ export const translations = {
       contact: "Contact",
     },
     hero: {
-      badge: "Available for Work",
       headingLine1: "Web Developer,",
       headingLine2: "Front-end & UI/UX Designer.",
       subheading: "Based in Jakarta",
-      bio: "Hi, I'm Reza Andikatama — Information Systems graduate with a background in DevOps & IT Support. Bridging infrastructure expertise with a strong passion for Web/Frontend, UI/UX, and QA to build reliable, end-to-end digital products.",
+      bio: "Hi, I'm Reza. Crafting intuitive interfaces and building solid web performance behind the scenes.",
       cta: "See my works",
+    },
+    about: {
+      label: "About Me",
+      heading: "Get To Know Me",
+      bio1: "I am an Information Systems graduate with a background in DevOps, IT Support, and a strong passion for Frontend Development and UI/UX Design.",
+      bio2: "Bridging technical infrastructure understanding with interface design sensibilities, I focus on building web applications that are visually appealing, responsive, performant, and user-friendly.",
+      educationLabel: "Education",
+      educationDegree: "Bachelor of Information Systems",
+      locationLabel: "Location",
+      locationCity: "Jakarta, Indonesia",
     },
     services: {
       label: "What I Do",
@@ -112,7 +132,7 @@ export const translations = {
     },
     portfolio: {
       label: "Portfolio",
-      heading: "Selected Works",
+      heading: "Showcase",
       detailButton: "Detail",
       modalDesc: "Project Description",
       modalTechStack: "Tech Stack",

@@ -1,3 +1,6 @@
+// ==========================================
+// IMPORT ASSETS (EXPERIENCE)
+// ==========================================
 import loisLogo from "../assets/loislogo.png";
 import loisDoucmentation from "../assets/intern-lois.jpg";
 import kkpLogo from "../assets/kkplogo.png";
@@ -8,7 +11,32 @@ import reportKKP3 from "../assets/reportkkp3.jpeg";
 import anterajaLogo from "../assets/anteraja-logo.jpg";
 import indomaretLogo from "../assets/indomart-logo.png";
 
+// ==========================================
+// IMPORT ASSETS (PORTFOLIO)
+// ==========================================
+import sistemOperasional from "../assets/sistemoperasional.png";
+import cekStatus from "../assets/cekstatus.png";
+import dashboard from "../assets/dashboard.png";
+import dokumentasiBTM from "../assets/dokBTM.jpeg";
+import dokumentasiBTM2 from "../assets/dokBTM2.jpeg";
+import thumbnails from "../assets/thumbnail.png";
+import ssUI from "../assets/uiux.png";
+import thumbnailLMS from "../assets/homelms.png";
+import lms1 from "../assets/lms1.png";
+import lms2 from "../assets/lms2.png";
+import noka1 from "../assets/noka1.png";
+import noka2 from "../assets/noka2.png";
+import noka3 from "../assets/noka3.png";
+import wasirThumb from "../assets/wasitThumbnail.png";
+import wasir1 from "../assets/Wasircore - Home Page.png";
+import wasir2 from "../assets/Wasircore - Layanan.png";
+import wasir3 from "../assets/Wasircore - About Us.png";
+import wasir4 from "../assets/Wasircore - Blog Edukasi Kesehatan.png";
+import wasir5 from "../assets/Wasircore - Contact Us.png";
+
+// ==========================================
 // --- SKILLS DATA ---
+// ==========================================
 export interface Skill {
   id: number;
   name: string;
@@ -31,7 +59,9 @@ export const skillsData: Skill[] = [
   { id: 12, name: "Docker", icon: "devicon-docker-plain", desc: "Containerization untuk lingkungan development yang konsisten." },
 ];
 
+// ==========================================
 // --- EXPERIENCE DATA ---
+// ==========================================
 export interface Experience {
   id: string;
   role: string;
@@ -83,5 +113,72 @@ export const experienceData: Experience[] = [
     logo: kkpLogo,
     desc: "Berperan dalam merancang, membangun, dan memelihara pipeline CI/CD (Continuous Integration & Continuous Deployment) untuk aplikasi layanan internal kementerian. Melakukan otomatisasi konfigurasi web server, manajemen container (Docker & Kubernetes), serta memantau (monitoring) performa server agar aplikasi dapat berjalan dengan stabilitas tinggi dan minim downtime.",
     images: [kkpDocumentation, reportKKP, reportKKP2, reportKKP3],
+  },
+];
+
+// ==========================================
+// --- PORTFOLIO DATA ---
+// ==========================================
+export interface PortfolioItem {
+  id: number;
+  title: string;
+  img: string;
+  desc: string;
+  problem: string;
+  techStack: string[];
+  images: string[];
+  category: string;
+}
+
+export const portfolios: PortfolioItem[] = [
+  {
+    id: 1,
+    title: "Learning Management System",
+    img: thumbnailLMS,
+    desc: "Mengembangkan dan men-deploy platform E-Learning berbasis Moodle 5 di lingkungan terkontainerisasi. Proyek ini memecahkan masalah beban server pada aplikasi monolith dengan mendelegasikan tugas asinkron (sistem notifikasi email otomatis) ke microservice Node.js yang berdiri sendiri.",
+    problem: "Tingginya beban server pada aplikasi monolith saat memproses tugas asinkron seperti pengiriman email massal, yang menyebabkan performa LMS menurun drastis saat diakses banyak pengguna.",
+    techStack: ["Moodle", "Docker", "Node.js", "Nginx", "Pipeline"],
+    images: [lms1, lms2],
+    category: "DevOps",
+  },
+  {
+    id: 2,
+    title: "Sistem Operasional Bengkel Manufaktur",
+    img: sistemOperasional,
+    desc: "Sebuah sistem informasi berbasis web yang dirancang khusus untuk mendigitalisasi dan mengoptimalkan proses operasional manajemen PT Briliant Teknik Mandiri. Aplikasi ini dibangun dengan arsitektur modern berbasis container (Docker) untuk memastikan skalabilitas dan stabilitas di lingkungan production, serta didukung oleh pipeline otomatisasi untuk efisiensi pengembangan.",
+    problem: "Proses pencatatan operasional dan manajemen bengkel yang sebelumnya masih manual, menyebabkan inefisiensi waktu, rentan terhadap kehilangan data, dan menyulitkan pemantauan status produksi secara real-time.",
+    techStack: ["Laravel", "Tailwind CSS", "PHP", "Docker", "MySQL", "CI/CD"],
+    images: [cekStatus, dashboard, dokumentasiBTM, dokumentasiBTM2],
+    category: "Web App",
+  },
+  {
+    id: 3,
+    title: "Banking App UI",
+    img: ssUI,
+    desc: "Sebuah konsep ulang pengalaman perbankan digital yang berfokus pada kemudahan pengguna, keamanan, dan pengelolaan finansial yang lebih personal. Proyek ini bertujuan mengubah antarmuka perbankan tradisional yang kaku menjadi lebih ramah, modern, dan intuitif, khususnya bagi milenial dan Gen Z.",
+    problem: "Antarmuka aplikasi perbankan tradisional yang kaku, kompleks, dan kurang intuitif, sehingga membuat pengguna muda merasa kesulitan dan kurang nyaman dalam mengelola keuangan harian mereka.",
+    techStack: ["Figma", "Wireframing", "Prototyping"],
+    images: [ssUI, thumbnails],
+    category: "UI/UX",
+  },
+  {
+    id: 4,
+    title: "Noka UI",
+    img: noka1,
+    desc: "Sebelumnya, calon jemaah sering kali kesulitan mendapatkan informasi perjalanan umrah yang kredibel dan detail karena keterbatasan platform digital yang usang serta tidak interaktif. Masalah ini diselesaikan melalui pengembangan landing page modern yang tidak hanya informatif, tetapi juga dilengkapi dengan navigasi interaktif, optimasi SEO tingkat tinggi untuk memperluas jangkauan, serta visualisasi yang mempermudah proses pengambilan keputusan jemaah secara aman dan nyaman.",
+    problem: "Calon jemaah sering kali kesulitan mendapatkan informasi perjalanan umrah yang kredibel dan detail karena keterbatasan platform digital yang usang, tidak interaktif, dan sulit diakses di perangkat seluler.",
+    techStack: ["Figma", "Wireframing", "Prototyping", "Tailwind CSS", "HTML"],
+    images: [noka1, noka2, noka3],
+    category: "UI/UX",
+  },
+  {
+    id: 5,
+    title: "Wasircore UI",
+    img: wasirThumb,
+    desc: "Menghadapi tantangan rendahnya kesadaran dan tingginya rasa cemas masyarakat dalam mencari pengobatan medis yang aman untuk penyakit sensitif seperti wasir, proyek ini merevolusi platform edukasi dan layanan kesehatan digital. Melalui pendekatan desain UI yang ramah, intuitif, dan bebas intimidasi, kami memecahkan masalah aksesibilitas informasi medis dengan menghadirkan visualisasi yang menenangkan, fitur konsultasi cepat, serta hierarki konten yang efektif guna membangun rasa percaya dan mempercepat konversi pasien.",
+    problem: "Rendahnya kesadaran dan tingginya rasa cemas atau malu di masyarakat dalam mencari pengobatan medis yang aman untuk penyakit sensitif seperti wasir, diperparah dengan informasi medis yang beredar seringkali mengintimidasi.",
+    techStack: ["Figma", "Wireframing", "Prototyping"],
+    images: [wasir1, wasir2, wasir3, wasir4, wasir5],
+    category: "UI/UX",
   },
 ];
