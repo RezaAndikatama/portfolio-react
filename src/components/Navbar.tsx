@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
+import Logo from "../components/Logo";
 
 function LanguageSwitch({ language, onToggle }: { language: "id" | "en"; onToggle: () => void }) {
   return (
@@ -50,8 +51,6 @@ export default function Navbar() {
     }
   };
 
-  // Catatan: key "profile"/href "#about" diganti "services"/"#services",
-  // karena section About sudah digantikan Services.
   const menuItems: { key: keyof typeof t; href: string }[] = [
     { key: "home", href: "#hero" },
     { key: "services", href: "#services" },
@@ -61,7 +60,6 @@ export default function Navbar() {
     { key: "contact", href: "#contact" },
   ];
 
-  // Scrollspy: pantau tiap section, tandai menu aktif sesuai section yang sedang terlihat di layar
   useEffect(() => {
     const sectionIds = menuItems.map((item) => item.href.replace("#", ""));
     const sections = sectionIds.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => el !== null);
@@ -91,9 +89,9 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 w-full z-50 p-4 transition-all duration-300">
       <nav aria-label="Main Navigation" className="max-w-7xl mx-auto glass-nav rounded-2xl px-6 py-3 transition-all duration-300 relative">
         <div className="flex items-center justify-between">
-          {/* Logo — kiri */}
-          <a href="#hero" className="text-xl font-bold text-gray-900 dark:text-white tracking-tight relative group flex-shrink-0">
-            Portfolio
+          {/* Logo — kiri (Sudah dilengkapi SVG Logo dinamis) */}
+          <a href="#hero" className="flex items-center gap-2.5 text-xl font-bold text-gray-900 dark:text-white tracking-tight relative group flex-shrink-0">
+            <Logo className="h-7 w-auto text-gray-900 dark:text-white group-hover:text-primary transition-colors" />
             <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
           </a>
 
@@ -116,7 +114,7 @@ export default function Navbar() {
             <ThemeButton isDark={isDark} onToggle={toggleTheme} />
           </div>
 
-          {/* Mobile: hanya tombol hamburger — dark mode & bahasa dipindah ke dalam dropdown */}
+          {/* Mobile: hamburger menu */}
           <div className="flex lg:hidden items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -129,7 +127,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Dropdown — menu + dark mode + bahasa */}
+        {/* Mobile Dropdown */}
         {isMenuOpen && (
           <div className="flex flex-col gap-2 pt-4 mt-4 border-t border-gray-200 dark:border-white/10 lg:hidden">
             {menuItems.map((item) => (
@@ -138,7 +136,6 @@ export default function Navbar() {
               </a>
             ))}
 
-            {/* Dark Mode + Bahasa — dalam dropdown mobile, pakai komponen yang sama dengan desktop */}
             <div className="flex items-center justify-between gap-3 mt-2 pt-4 border-t border-gray-200 dark:border-white/10">
               <span className="text-xs font-mono text-gray-500 dark:text-gray-400 uppercase tracking-wider">{language === "id" ? "Pengaturan" : "Settings"}</span>
               <div className="flex items-center gap-3">
