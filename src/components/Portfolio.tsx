@@ -5,10 +5,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-// 1. Mengambil data dan interface dari file data terpisah
 import { portfolios, type PortfolioItem } from "../data/portfolioData";
 
-// 2. Import Hooks & Context
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
@@ -20,14 +18,12 @@ export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("All");
 
-  // STATE: Untuk menyimpan URL gambar yang sedang di-preview fullscreen
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const { ref, isInView } = useInView();
   const { language } = useLanguage();
   const t = translations[language].portfolio;
 
-  // Label tombol pagination mengikuti bahasa yang aktif
   const prevLabel = language === "id" ? "Sebelumnya" : "Previous";
   const nextLabel = language === "id" ? "Berikutnya" : "Next";
 

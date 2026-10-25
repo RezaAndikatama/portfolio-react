@@ -1,6 +1,4 @@
-// ==========================================
 // IMPORT ASSETS (EXPERIENCE)
-// ==========================================
 import loisLogo from "../assets/loislogo.png";
 import loisDoucmentation from "../assets/intern-lois.jpg";
 import kkpLogo from "../assets/kkplogo.png";
@@ -11,16 +9,19 @@ import reportKKP3 from "../assets/reportkkp3.jpeg";
 import anterajaLogo from "../assets/anteraja-logo.jpg";
 import indomaretLogo from "../assets/indomart-logo.png";
 
-// ==========================================
 // IMPORT ASSETS (PORTFOLIO)
-// ==========================================
 import sistemOperasional from "../assets/sistemoperasional.png";
 import cekStatus from "../assets/cekstatus.png";
 import dashboard from "../assets/dashboard.png";
 import dokumentasiBTM from "../assets/dokBTM.jpeg";
 import dokumentasiBTM2 from "../assets/dokBTM2.jpeg";
-import thumbnails from "../assets/thumbnail.png";
 import ssUI from "../assets/uiux.png";
+import thumbnails from "../assets/banking.png";
+import banking1 from "../assets/Banking Apps.png";
+import banking2 from "../assets/banking 2.png";
+import banking3 from "../assets/banking 3.png";
+import banking4 from "../assets/banking 4.png";
+import banking5 from "../assets/banking 5.png";
 import thumbnailLMS from "../assets/homelms.png";
 import lms1 from "../assets/lms1.png";
 import lms2 from "../assets/lms2.png";
@@ -34,9 +35,7 @@ import wasir3 from "../assets/Wasircore - About Us.png";
 import wasir4 from "../assets/Wasircore - Blog Edukasi Kesehatan.png";
 import wasir5 from "../assets/Wasircore - Contact Us.png";
 
-// ==========================================
 // --- SKILLS DATA ---
-// ==========================================
 export interface Skill {
   id: number;
   name: string;
@@ -143,10 +142,10 @@ export const portfolios: PortfolioItem[] = [
   },
   {
     id: 2,
-    title: "Sistem Operasional Bengkel Manufaktur",
+    title: "Sistem Operasional Bengkel Manufaktur Berbasis Web Pada PT Briliant Teknik Mandiri",
     img: sistemOperasional,
     desc: "Sebuah sistem informasi berbasis web yang dirancang khusus untuk mendigitalisasi dan mengoptimalkan proses operasional manajemen PT Briliant Teknik Mandiri. Aplikasi ini dibangun dengan arsitektur modern berbasis container (Docker) untuk memastikan skalabilitas dan stabilitas di lingkungan production, serta didukung oleh pipeline otomatisasi untuk efisiensi pengembangan.",
-    problem: "Proses pencatatan operasional dan manajemen bengkel yang sebelumnya masih manual, menyebabkan inefisiensi waktu, rentan terhadap kehilangan data, dan menyulitkan pemantauan status produksi secara real-time.",
+    problem: "Proses pendataan order dan manajemen bengkel yang sebelumnya masih menggunakan buku, sering terjadi ketidaksamaan data bahan baku, rentan terhadap kehilangan data, dan menyulitkan customer pemantauan status produksi secara real-time.",
     techStack: ["Laravel", "Tailwind CSS", "PHP", "Docker", "MySQL", "CI/CD"],
     images: [cekStatus, dashboard, dokumentasiBTM, dokumentasiBTM2],
     category: "Web App",
@@ -154,11 +153,11 @@ export const portfolios: PortfolioItem[] = [
   {
     id: 3,
     title: "Banking App UI",
-    img: ssUI,
-    desc: "Sebuah konsep ulang pengalaman perbankan digital yang berfokus pada kemudahan pengguna, keamanan, dan pengelolaan finansial yang lebih personal. Proyek ini bertujuan mengubah antarmuka perbankan tradisional yang kaku menjadi lebih ramah, modern, dan intuitif, khususnya bagi milenial dan Gen Z.",
-    problem: "Antarmuka aplikasi perbankan tradisional yang kaku, kompleks, dan kurang intuitif, sehingga membuat pengguna muda merasa kesulitan dan kurang nyaman dalam mengelola keuangan harian mereka.",
+    img: thumbnails,
+    desc: "Sebuah konsep ulang pengalaman Mobile Banking yang berfokus pada kemudahan pengguna, keamanan, dan pengelolaan finansial yang lebih personal. Konsep ini bertujuan mengubah UI/UX pada Mobile Banking yang kaku menjadi lebih ramah, modern, dan intuitif, khususnya bagi milenial dan Gen Z.",
+    problem: "Analisis masalah pada user ketika menggunakan aplikasi Mobile Banking khususnya untuk milenial dan gen z, UI/UX ini dibuat untuk menyelesaikan mata kuliah pada semester 4.",
     techStack: ["Figma", "Wireframing", "Prototyping"],
-    images: [ssUI, thumbnails],
+    images: [banking1, banking2, banking3, banking4, banking5, ssUI],
     category: "UI/UX",
   },
   {
