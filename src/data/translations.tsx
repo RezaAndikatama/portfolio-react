@@ -13,7 +13,7 @@ export const translations = {
       headingLine1: "Web Developer,",
       headingLine2: "Front-end & UI/UX Designer.",
       subheading: "Berbasis di Jakarta",
-      bio: "Hi, saya Reza. Merancang antarmuka intuitif dan membangun performa web yang solid di balik layar.",
+      bio: "Hi, saya Reza Andikatama. Fresh graduate S1 Sistem Informasi Universitas Bina Sarana Informatika yang saat ini mencari kesempatan karir profesional di bidang Web Development.",
       cta: "Lihat karya saya",
     },
     about: {
@@ -91,7 +91,7 @@ export const translations = {
       headingLine1: "Web Developer,",
       headingLine2: "Front-end & UI/UX Designer.",
       subheading: "Based in Jakarta",
-      bio: "Hi, I'm Reza. Crafting intuitive interfaces and building solid web performance behind the scenes.",
+      bio: "Hi, I'm Reza Andikatama. I'm a fresh graduate with a Bachelor's degree in Information Systems from Bina Sarana Informatika University, currently seeking professional career opportunities in Web Development.",
       cta: "See my works",
     },
     about: {
