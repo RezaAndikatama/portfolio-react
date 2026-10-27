@@ -37,7 +37,7 @@ export default function Portfolio() {
     document.body.style.overflow = "";
   };
 
-  const categories = ["All", "Web App", "UI/UX", "DevOps"];
+  const categories = ["All", "Web App", "UI/UX"];
   const filteredPortfolios = activeFilter === "All" ? portfolios : portfolios.filter((item) => item.category === activeFilter);
 
   return (

@@ -1,14 +1,12 @@
 import type { ReactNode } from "react";
-import { Code2, PenTool, Cloud } from "lucide-react";
+import { Code2, PenTool, ShieldCheck } from "lucide-react";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
 
-// Icon lucide-react untuk tiap layanan, urut sesuai items di translations.ts
-const SERVICE_ICONS = [Code2, PenTool, Cloud];
+// Icon lucide-react untuk tiap layanan: Front-End (Code2), UI/UX (PenTool), QA (ShieldCheck)
+const SERVICE_ICONS = [Code2, PenTool, ShieldCheck];
 
-// Kotak ikon bermotif grid + mask radial — elemen dekoratif khas dari referensi "features-2".
-// Diadaptasi tanpa shadcn (tidak pakai <Card>), murni div + Tailwind seperti bagian lain di project ini.
 function CardDecorator({ children }: { children: ReactNode }) {
   return (
     <div aria-hidden className="relative mx-auto size-16 md:size-20 [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]">
@@ -34,7 +32,6 @@ export default function Services() {
           </h2>
         </div>
 
-        {/* Grid 3 kolom, tiap card berisi CardDecorator + judul + deskripsi, semua rata tengah (mengikuti gaya referensi) */}
         <div className="mx-auto grid max-w-sm gap-6 *:text-center md:max-w-full md:grid-cols-3">
           {t.items.map((item, index) => {
             const Icon = SERVICE_ICONS[index];
@@ -42,7 +39,11 @@ export default function Services() {
               <div
                 key={item.title}
                 className={`group bg-gray-50 dark:bg-cardDark rounded-2xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-                style={{ transitionDelay: isInView ? `${index * 120}ms` : "0ms", transitionDuration: "700ms", transitionTimingFunction: "ease-out" }}
+                style={{
+                  transitionDelay: isInView ? `${index * 120}ms` : "0ms",
+                  transitionDuration: "700ms",
+                  transitionTimingFunction: "ease-out",
+                }}
               >
                 <CardDecorator>
                   <Icon className="size-5 md:size-6 text-primary" aria-hidden />

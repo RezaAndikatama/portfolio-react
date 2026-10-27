@@ -41,9 +41,9 @@ export const translations = {
           tags: ["Figma", "Wireframing", "Prototyping", "Web Desain", "Mobile App Desain"],
         },
         {
-          title: "DevOps",
-          desc: "Menyiapkan pipeline CI/CD, containerization, dan konfigurasi server agar aplikasi berjalan stabil dengan proses deployment yang efisien.",
-          tags: ["Docker", "CI/CD", "Pipeline", "Nginx"],
+          title: "Quality Assurance (QA)",
+          desc: "Melakukan pengujian perangkat lunak secara komprehensif, baik manual maupun otomatis, untuk mengidentifikasi bug lebih awal dan memastikan aplikasi berjalan optimal sebelum rilis.",
+          tags: ["Manual Testing", "Automated Testing", "API Testing", "Postman"],
         },
       ],
     },
@@ -110,7 +110,7 @@ export const translations = {
       items: [
         {
           title: "Front-End Developer",
-          desc: "Translate design to code for applications from scratch using Tailwind, React, and Build Responsive Website.",
+          desc: "Translate design to code for applications from scratch using Tailwind, Bootstrap, React, and Build Responsive Website.",
           tags: ["Laravel", "React", "Bootstrap", "Tailwind CSS"],
         },
         {
@@ -119,9 +119,9 @@ export const translations = {
           tags: ["Figma", "Wireframing", "Prototyping", "Web Design", "Mobile App Design"],
         },
         {
-          title: "DevOps",
-          desc: "Setting up CI/CD pipelines, containerization, and server configuration so applications run stably with an efficient deployment process.",
-          tags: ["Docker", "CI/CD", "Pipeline", "Nginx"],
+          title: "Quality Assurance (QA)",
+          desc: "Performing comprehensive manual and automated testing to identify bugs early and ensure applications run optimally and bug-free before production release.",
+          tags: ["Manual Testing", "Automated Testing", "API Testing", "Postman"],
         },
       ],
     },
