@@ -16,16 +16,21 @@ export const translations = {
       bio: "Hi, saya Reza Andikatama. Fresh graduate S1 Sistem Informasi Universitas Bina Sarana Informatika yang saat ini mencari kesempatan karir profesional di bidang Web Development.",
       cta: "Lihat karya saya",
     },
-    about: {
-      label: "Tentang Saya",
-      heading: "Mengenal Lebih Dekat",
-      bio1: "Saya seorang Lulusan Sistem Informasi dengan latar belakang di bidang DevOps, IT Support, serta minat mendalam pada pengembangan Frontend dan UI/UX Design.",
-      bio2: "Memadukan pemahaman infrastruktur teknis dengan kepekaan desain antarmuka, saya berfokus menciptakan aplikasi web yang tidak hanya memiliki tampilan menarik, tetapi juga responsif, performan, dan mudah digunakan.",
-      educationLabel: "Pendidikan",
-      educationDegree: "S1 Sistem Informasi",
-      locationLabel: "Lokasi",
-      locationCity: "Jakarta, Indonesia",
-    },
+    // about: {
+    //   label: "Tentang Saya",
+    //   headingPart1: "Mengenal",
+    //   headingPart2: "Lebih Dekat",
+    //   bioParagraph1:
+    //     "Lulusan S1 Sistem Informasi dari Universitas Bina Sarana Informatika dengan ketertarikan kuat pada siklus pengembangan web secara menyeluruh. Saya berfokus pada pembangunan antarmuka pengguna yang responsif, terstruktur, serta memiliki performa tinggi.",
+    //   bioParagraph2:
+    //     "Selain penulisan kode di sisi frontend, saya juga memiliki pemahaman dasar dalam perancangan antarmuka (UI/UX) serta pengujian kualitas perangkat lunak (QA Manual) untuk memastikan setiap fitur berjalan sesuai dengan standar fungsionalitas yang diharapkan.",
+    //   details: [
+    //     { label: "Pendidikan", value: "S1 Sistem Informasi — Universitas BSI" },
+    //     { label: "Fokus Karir", value: "Web Developer / Frontend & QA" },
+    //     { label: "Domisili", value: "Jakarta / Depok, Indonesia" },
+    //     { label: "Status", value: "Siap Kerja (Full-time / Contract)" },
+    //   ],
+    // },
     services: {
       label: "Keahlian",
       heading: "Layanan Saya",
@@ -94,16 +99,19 @@ export const translations = {
       bio: "Hi, I'm Reza Andikatama. I'm a fresh graduate with a Bachelor's degree in Information Systems from Bina Sarana Informatika University, currently seeking professional career opportunities in Web Development.",
       cta: "See my works",
     },
-    about: {
-      label: "About Me",
-      heading: "Get To Know Me",
-      bio1: "I am an Information Systems graduate with a background in DevOps, IT Support, and a strong passion for Frontend Development and UI/UX Design.",
-      bio2: "Bridging technical infrastructure understanding with interface design sensibilities, I focus on building web applications that are visually appealing, responsive, performant, and user-friendly.",
-      educationLabel: "Education",
-      educationDegree: "Bachelor of Information Systems",
-      locationLabel: "Location",
-      locationCity: "Jakarta, Indonesia",
-    },
+    // about: {
+    //   label: "About Me",
+    //   headingPart1: "Get To",
+    //   headingPart2: "Know Me",
+    //   bioParagraph1: "An Information Systems graduate from Bina Sarana Informatika University with a strong passion for end-to-end web development. I focus on building responsive, clean, and high-performance user interfaces.",
+    //   bioParagraph2: "Beyond frontend development, I hold foundational knowledge in UI/UX design and Quality Assurance (Manual Testing) to ensure applications meet design precision and functional standards before deployment.",
+    //   details: [
+    //     { label: "Education", value: "B.S. in Information Systems — BSI University" },
+    //     { label: "Career Focus", value: "Web Developer / Frontend & QA" },
+    //     { label: "Location", value: "Jakarta / Depok, Indonesia" },
+    //     { label: "Status", value: "Available for Hire (Full-time / Contract)" },
+    //   ],
+    // },
     services: {
       label: "What I Do",
       heading: "My Services",

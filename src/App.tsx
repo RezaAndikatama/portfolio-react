@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+// import About from "./components/About";
 import Services from "./components/Services";
 import Portfolio from "./components/Portfolio";
 import Skills from "./components/Skills";
@@ -14,8 +15,6 @@ function App() {
   const [fadeSplash, setFadeSplash] = useState(false);
 
   useEffect(() => {
-    // 1 siklus kata = 3000ms. Untuk 3 kata butuh waktu sekitar 8-9 detik.
-    // Fade out dimulai pada detik ke-8 saat kata "WELCOME" sedang tampil penuh.
     const timer1 = setTimeout(() => {
       setFadeSplash(true);
     }, 8000);
@@ -48,6 +47,7 @@ function App() {
 
         <main>
           <Hero />
+          {/* <About /> */}
           <Services />
           <Portfolio />
           <Skills />

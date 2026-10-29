@@ -137,7 +137,7 @@ export const portfolios: PortfolioItem[] = [
     desc: "Mengembangkan dan men-deploy platform E-Learning berbasis Moodle 5 di lingkungan terkontainerisasi. Proyek ini memecahkan masalah beban server pada aplikasi monolith dengan mendelegasikan tugas asinkron (sistem notifikasi email otomatis) ke microservice Node.js yang berdiri sendiri.",
     problem: "Tingginya beban server pada aplikasi monolith saat memproses tugas asinkron seperti pengiriman email massal, yang menyebabkan performa LMS menurun drastis saat diakses banyak pengguna.",
     techStack: ["Moodle", "Docker", "Node.js", "Nginx", "Pipeline", "Microservices"],
-    images: [lms1, lms2],
+    images: [thumbnailLMS, lms1, lms2],
     category: "Web App",
   },
   {

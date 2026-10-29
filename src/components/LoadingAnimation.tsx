@@ -4,7 +4,7 @@ export const KineticTypographyLoader = () => {
   const loaderTextRef = useRef<HTMLHeadingElement>(null);
 
   // Anda bisa mengganti kata-katanya di sini!
-  const words = ["HALLO", "LOADING", "WELCOME"];
+  const words = ["HELLO", "WELCOME TO", "MY PORTFOLIO"];
 
   useEffect(() => {
     const loaderText = loaderTextRef.current;
