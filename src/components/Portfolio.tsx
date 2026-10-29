@@ -83,7 +83,12 @@ export default function Portfolio() {
                   className={`bg-white dark:bg-cardDark border border-gray-100 dark:border-white/5 rounded-2xl p-5 h-full flex flex-col shadow-sm hover:shadow-xl dark:shadow-none transition-all hover:-translate-y-1 ${
                     isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                   }`}
-                  style={{ transitionProperty: "opacity, transform, box-shadow", transitionDuration: "700ms", transitionDelay: isInView ? `${index * 100}ms` : "0ms", transitionTimingFunction: "ease-out" }}
+                  style={{
+                    transitionProperty: "opacity, transform, box-shadow",
+                    transitionDuration: "700ms",
+                    transitionDelay: isInView ? `${index * 100}ms` : "0ms",
+                    transitionTimingFunction: "ease-out",
+                  }}
                 >
                   <img src={item.img} alt={`Preview of ${item.title}`} className="w-full h-48 object-cover rounded-xl mb-5" />
                   <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">{item.title}</h3>
