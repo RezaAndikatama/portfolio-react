@@ -23,8 +23,6 @@ const WAVE_STAGGER = 0.06;
 const WIPE_DURATION = 0.9;
 const WIPE_TIMES = [0, 0.4, 1] as number[];
 
-// 1. Data dikelompokkan berdasarkan Role.
-// Sesuaikan nama class icon (bx atau devicon) dengan yang Anda gunakan.
 const SKILL_CATEGORIES = [
   {
     role: "Web Developer",
@@ -39,6 +37,7 @@ const SKILL_CATEGORIES = [
       { id: "laravel", name: "Laravel", icon: "devicon-laravel-plain" },
       { id: "mysql", name: "MySQL", icon: "devicon-mysql-plain" },
       { id: "github", name: "GitHub", icon: "bx bxl-github" },
+      { id: "docker", name: "Docker", icon: "bx bxl-docker" },
     ],
   },
   {
