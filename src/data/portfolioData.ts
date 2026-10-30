@@ -34,28 +34,59 @@ import wasir2 from "../assets/Wasircore - Layanan.png";
 import wasir3 from "../assets/Wasircore - About Us.png";
 import wasir4 from "../assets/Wasircore - Blog Edukasi Kesehatan.png";
 import wasir5 from "../assets/Wasircore - Contact Us.png";
+import sertifikatKKP from "../assets/sertifikatKKP.png";
+import sertifikatBNSP from "../assets/sertifikatBNSP.png";
+import sertifikatTOEFL from "../assets/sertifikatTOEFL.png";
+import sertifikatIT from "../assets/sertifikatITBootcamp.png";
+import sertifikatDicoding from "../assets/sertifikatDicoding.png";
 
+// ==========================================
 // --- SKILLS DATA ---
-export interface Skill {
-  id: number;
+// ==========================================
+export interface SkillItem {
+  id: string;
   name: string;
   icon: string;
-  desc: string;
 }
 
-export const skillsData: Skill[] = [
-  { id: 1, name: "HTML5", icon: "devicon-html5-plain", desc: "Struktur dasar semantik untuk setiap halaman web yang dibangun." },
-  { id: 2, name: "CSS", icon: "devicon-css3-plain", desc: "Styling tampilan web dengan layout, animasi, dan desain responsif." },
-  { id: 3, name: "JavaScript", icon: "devicon-javascript-plain", desc: "Membangun interaksi dinamis dan logika pada sisi client maupun server." },
-  { id: 4, name: "Bootstrap 5", icon: "devicon-bootstrap-plain", desc: "Styling tampilan web dengan layout, animasi, dan desain responsif." },
-  { id: 5, name: "Tailwind CSS", icon: "devicon-tailwindcss-plain", desc: "Styling cepat dan konsisten dengan utility-first CSS framework modern." },
-  { id: 6, name: "PHP", icon: "devicon-php-plain", desc: "Mengembangkan backend web dengan bahasa server-side yang powerful." },
-  { id: 7, name: "Laravel", icon: "devicon-laravel-plain", desc: "Framework PHP modern untuk membangun aplikasi web yang terstruktur." },
-  { id: 8, name: "GitHub", icon: "devicon-github-original", desc: "Version control dan kolaborasi manajemen kode secara efisien." },
-  { id: 9, name: "React", icon: "devicon-react-plain", desc: "Membangun antarmuka pengguna berbasis komponen yang reusable." },
-  { id: 10, name: "Figma", icon: "devicon-figma-plain", desc: "Merancang UI/UX Website dan Mobile." },
-  { id: 11, name: "MySQL", icon: "devicon-mysql-plain", desc: "Mengelola basis data relasional untuk penyimpanan data aplikasi." },
-  { id: 12, name: "Docker", icon: "devicon-docker-plain", desc: "Containerization untuk lingkungan development yang konsisten." },
+export interface SkillCategory {
+  role: string;
+  skills: SkillItem[];
+}
+
+export const SKILL_CATEGORIES: SkillCategory[] = [
+  {
+    role: "Web Developer",
+    skills: [
+      { id: "html", name: "HTML5", icon: "devicon-html5-plain" },
+      { id: "css", name: "CSS3", icon: "devicon-css3-plain" },
+      { id: "js", name: "JavaScript", icon: "devicon-javascript-plain" },
+      { id: "php", name: "PHP", icon: "devicon-php-plain" },
+      { id: "react", name: "React", icon: "devicon-react-original" },
+      { id: "tailwind", name: "Tailwind", icon: "devicon-tailwindcss-plain" },
+      { id: "bootstrap", name: "Bootstrap", icon: "devicon-bootstrap-plain" },
+      { id: "laravel", name: "Laravel", icon: "devicon-laravel-plain" },
+      { id: "mysql", name: "MySQL", icon: "devicon-mysql-plain" },
+      { id: "github", name: "GitHub", icon: "bx bxl-github" },
+      { id: "docker", name: "Docker", icon: "bx bxl-docker" },
+      { id: "dbeaver", name: "DBeaver", icon: "devicon-dbeaver-plain" },
+    ],
+  },
+  {
+    role: "UI/UX Design",
+    skills: [
+      { id: "figma", name: "Figma", icon: "figma" },
+      { id: "canva", name: "Canva", icon: "devicon-canva-original" },
+    ],
+  },
+  {
+    role: "Quality Assurance",
+    skills: [
+      { id: "postman", name: "Postman", icon: "bx bx-server" },
+      { id: "manual", name: "Manual Test", icon: "bx bx-check-shield" },
+      { id: "owasp", name: "OWASP ZAP", icon: "bx bx-radar" },
+    ],
+  },
 ];
 
 // ==========================================
@@ -145,7 +176,8 @@ export const portfolios: PortfolioItem[] = [
     title: "Sistem Operasional Bengkel Manufaktur Berbasis Web Pada PT Briliant Teknik Mandiri",
     img: sistemOperasional,
     desc: "Sebuah sistem informasi berbasis web yang dirancang khusus untuk mendigitalisasi dan mengoptimalkan proses operasional manajemen PT Briliant Teknik Mandiri. Aplikasi ini dibangun dengan arsitektur modern berbasis container (Docker) untuk memastikan skalabilitas dan stabilitas di lingkungan production, serta didukung oleh pipeline otomatisasi untuk efisiensi pengembangan.",
-    problem: "Proses pendataan order dan manajemen bengkel yang sebelumnya masih menggunakan buku, sering terjadi ketidaksamaan data bahan baku, rentan terhadap kehilangan data, dan menyulitkan customer pemantauan status produksi secara real-time.",
+    problem:
+      "Proses pendataan order dan manajemen bengkel yang sebelumnya masih menggunakan buku, sering terjadi ketidaksamaan data bahan baku, rentan terhadap kehilangan data, dan menyulitkan customer pemantauan status produksi secara real-time.",
     techStack: ["Laravel", "Tailwind CSS", "PHP", "Docker", "MySQL", "CI/CD"],
     images: [cekStatus, dashboard, dokumentasiBTM, dokumentasiBTM2],
     category: "Web App",
@@ -179,5 +211,55 @@ export const portfolios: PortfolioItem[] = [
     techStack: ["Figma", "Wireframing", "Prototyping"],
     images: [wasir1, wasir2, wasir3, wasir4, wasir5],
     category: "UI/UX",
+  },
+  {
+    id: 6,
+    title: "Sertifikat Magang Kementerian Kelautan dan Perikanan",
+    img: sertifikatKKP,
+    desc: "Sertifikat pencapaian penyelesaian magang sebagai Junior Web Developer.",
+    problem: "Mempelajari case dari proyek nyata kementerian.",
+    techStack: ["Web Development", "Moodle", "Docker", "CI/CD", "Containerization", "Git", "WSL", "UI/UX", "Postman", "Quality Assurance"],
+    images: [sertifikatKKP],
+    category: "Certification",
+  },
+  {
+    id: 7,
+    title: "Sertifikat BNSP",
+    img: sertifikatBNSP,
+    desc: "Sertifikat Kompetensi Software Development.",
+    problem: "-",
+    techStack: ["Web Development", "Laravel", "TailwindCSS", "MySQL"],
+    images: [sertifikatBNSP],
+    category: "Certification",
+  },
+  {
+    id: 8,
+    title: "Sertifikat IT Bootcamp Software Development",
+    img: sertifikatIT,
+    desc: "Sertifikat Bootcamp Software Development.",
+    problem: "-",
+    techStack: ["Web Development", "Laravel", "TailwindCSS", "MySQL"],
+    images: [sertifikatIT],
+    category: "Certification",
+  },
+  {
+    id: 9,
+    title: "Sertifikat TOEFL Prediction English Test",
+    img: sertifikatTOEFL,
+    desc: "Sertifikat Kompetensi Software Development.",
+    problem: "-",
+    techStack: ["Test score 530"],
+    images: [sertifikatTOEFL],
+    category: "Certification",
+  },
+  {
+    id: 10,
+    title: "Sertifikat Web Development",
+    img: sertifikatDicoding,
+    desc: "Sertifikat belajar pengembangan web.",
+    problem: "Belajar fundamental web programming",
+    techStack: ["Semantic HTML", "Bootstrap", "TailwindCSS", "Javascript", "Layouting"],
+    images: [sertifikatTOEFL],
+    category: "Certification",
   },
 ];

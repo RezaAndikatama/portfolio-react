@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
+import { SKILL_CATEGORIES } from "../data/portfolioData";
 
 function FigmaIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
@@ -22,38 +23,6 @@ const WAVE_INTERVAL = 4000;
 const WAVE_STAGGER = 0.06;
 const WIPE_DURATION = 0.9;
 const WIPE_TIMES = [0, 0.4, 1] as number[];
-
-const SKILL_CATEGORIES = [
-  {
-    role: "Web Developer",
-    skills: [
-      { id: "html", name: "HTML5", icon: "devicon-html5-plain" },
-      { id: "css", name: "CSS3", icon: "devicon-css3-plain" },
-      { id: "js", name: "JavaScript", icon: "devicon-javascript-plain" },
-      { id: "php", name: "PHP", icon: "devicon-php-plain" },
-      { id: "react", name: "React", icon: "devicon-react-original" },
-      { id: "tailwind", name: "Tailwind", icon: "devicon-tailwindcss-plain" },
-      { id: "bootstrap", name: "Bootstrap", icon: "devicon-bootstrap-plain" },
-      { id: "laravel", name: "Laravel", icon: "devicon-laravel-plain" },
-      { id: "mysql", name: "MySQL", icon: "devicon-mysql-plain" },
-      { id: "github", name: "GitHub", icon: "bx bxl-github" },
-      { id: "docker", name: "Docker", icon: "bx bxl-docker" },
-    ],
-  },
-  {
-    role: "UI/UX Design",
-    skills: [
-      { id: "figma", name: "Figma", icon: "figma" }, // Figma menggunakan SVG kustom
-    ],
-  },
-  {
-    role: "QA Manual",
-    skills: [
-      { id: "postman", name: "Postman", icon: "bx bx-server" }, // Contoh boxicon
-      { id: "manual", name: "Manual Test", icon: "bx bx-check-shield" }, // Contoh boxicon
-    ],
-  },
-];
 
 export default function Skills() {
   const { ref, isInView } = useInView();
@@ -92,10 +61,18 @@ export default function Skills() {
               {/* Judul Kategori (Role) */}
               <h3 className="font-serif text-lg font-semibold text-gray-900 dark:text-white mb-6 border-b border-gray-100 dark:border-white/10 pb-3">{category.role}</h3>
 
-              {/* Container Icon dalam Kategori */}
-              <div className="flex flex-wrap gap-4">
+              {/* Container Icon dalam Kategori (Dengan Batas Tinggi dan Scrollbar) */}
+              <div
+                className="flex flex-wrap gap-4 max-h-[350px] overflow-y-auto pr-2 pb-2 
+                  [&::-webkit-scrollbar]:w-1.5 
+                  [&::-webkit-scrollbar-track]:bg-transparent 
+                  [&::-webkit-scrollbar-thumb]:bg-gray-300 
+                  dark:[&::-webkit-scrollbar-thumb]:bg-white/10 
+                  [&::-webkit-scrollbar-thumb]:rounded-full 
+                  hover:[&::-webkit-scrollbar-thumb]:bg-primary/80"
+              >
                 {category.skills.map((skill) => {
-                  const currentIndex = globalIndex++; // Index terus bertambah melewati batas kategori
+                  const currentIndex = globalIndex++;
                   const isFigma = skill.name === "Figma";
                   const isLast = currentIndex === totalSkills - 1;
 
@@ -122,7 +99,6 @@ export default function Skills() {
                               : { duration: 0.3, ease: "easeOut" }
                           }
                           onAnimationComplete={() => {
-                            // Matikan gelombang ketika item BENAR-BENAR terakhir telah selesai beranimasi
                             if (waving && isLast) setWaving(false);
                           }}
                           className="relative flex items-center justify-center w-full h-full"
