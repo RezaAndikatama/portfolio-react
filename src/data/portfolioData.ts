@@ -28,12 +28,6 @@ import lms2 from "../assets/lms2.png";
 import noka1 from "../assets/noka1.png";
 import noka2 from "../assets/noka2.png";
 import noka3 from "../assets/noka3.png";
-import wasirThumb from "../assets/wasitThumbnail.png";
-import wasir1 from "../assets/Wasircore - Home Page.png";
-import wasir2 from "../assets/Wasircore - Layanan.png";
-import wasir3 from "../assets/Wasircore - About Us.png";
-import wasir4 from "../assets/Wasircore - Blog Edukasi Kesehatan.png";
-import wasir5 from "../assets/Wasircore - Contact Us.png";
 import sertifikatKKP from "../assets/sertifikatKKP.png";
 import sertifikatBNSP from "../assets/sertifikatBNSP.png";
 import sertifikatTOEFL from "../assets/sertifikatTOEFL.png";
@@ -202,18 +196,8 @@ export const portfolios: PortfolioItem[] = [
     images: [noka1, noka2, noka3],
     category: "UI/UX",
   },
-  // {
-  //   id: 5,
-  //   title: "Wasircore UI",
-  //   img: wasirThumb,
-  //   desc: "Menghadapi tantangan rendahnya kesadaran dan tingginya rasa cemas masyarakat dalam mencari pengobatan medis yang aman untuk penyakit sensitif seperti wasir, proyek ini merevolusi platform edukasi dan layanan kesehatan digital. Melalui pendekatan desain UI yang ramah, intuitif, dan bebas intimidasi, kami memecahkan masalah aksesibilitas informasi medis dengan menghadirkan visualisasi yang menenangkan, fitur konsultasi cepat, serta hierarki konten yang efektif guna membangun rasa percaya dan mempercepat konversi pasien.",
-  //   problem: "Mengubah website landing page menjadi Company Profile sesuai dengan referensi desain yang diberikan client.",
-  //   techStack: ["Figma", "Wireframing", "Prototyping"],
-  //   images: [wasir1, wasir2, wasir3, wasir4, wasir5],
-  //   category: "UI/UX",
-  // },
   {
-    id: 6,
+    id: 5,
     title: "Sertifikat Magang Kementerian Kelautan dan Perikanan",
     img: sertifikatKKP,
     desc: "Sertifikat pencapaian penyelesaian magang sebagai Junior Web Developer.",
@@ -223,7 +207,7 @@ export const portfolios: PortfolioItem[] = [
     category: "Certification",
   },
   {
-    id: 7,
+    id: 6,
     title: "Sertifikat BNSP",
     img: sertifikatBNSP,
     desc: "Sertifikat Kompetensi Software Development.",
@@ -233,7 +217,7 @@ export const portfolios: PortfolioItem[] = [
     category: "Certification",
   },
   {
-    id: 8,
+    id: 7,
     title: "Sertifikat IT Bootcamp Software Development",
     img: sertifikatIT,
     desc: "Sertifikat Bootcamp Software Development.",
@@ -243,7 +227,7 @@ export const portfolios: PortfolioItem[] = [
     category: "Certification",
   },
   {
-    id: 9,
+    id: 8,
     title: "Sertifikat TOEFL Prediction English Test",
     img: sertifikatTOEFL,
     desc: "Sertifikat Kompetensi Software Development.",
@@ -253,7 +237,7 @@ export const portfolios: PortfolioItem[] = [
     category: "Certification",
   },
   {
-    id: 10,
+    id: 9,
     title: "Sertifikat Web Development",
     img: sertifikatDicoding,
     desc: "Sertifikat belajar pengembangan web.",
